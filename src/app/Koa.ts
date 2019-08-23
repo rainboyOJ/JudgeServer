@@ -10,15 +10,6 @@ export const createServer = ():Koa => {
         extension:'pug'
     }))
 
-    app.use(async function(ctx,next){
-        if( ctx.method == 'GET' && ctx.path === '/'){
-            await ctx.render('index',{
-                content:'hello world, JudgeServer!'
-            })
-        }
-        else
-            await next();
-    })
 
 
     return app;

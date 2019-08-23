@@ -5,7 +5,17 @@ import {createSocket} from './app/Socket'
 async function main(){
     try {
         var koa = createServer()
-        let {server} =createSocket(koa);
+        let {server,nsp} =createSocket(koa);
+
+        koa.use(async function(ctx,next){
+            if( ctx.method == 'GET' && ctx.path === '/'){
+                await ctx.render('index',{
+                    clients:Object.keys(nsp.sockets) 
+                })
+            }
+            else
+                await next();
+        })
 
 
 
