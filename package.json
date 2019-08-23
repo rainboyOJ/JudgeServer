@@ -6,7 +6,7 @@
   "author": "rainboy <rainboylvx@qq.com>",
   "license": "WTFPL",
   "dependencies": {
-    "@types/socket.io": "^2.1.2",
+    "koa-route-ex": "https://github.com/wariii-online-judge/koa-route-ex.git",
     "fs-extra": "^7.0.1",
     "ioredis": "^4.9.0",
     "js-yaml": "^3.13.1",
@@ -20,6 +20,7 @@
     "string-format": "^2.0.0"
   },
   "devDependencies": {
+    "@types/socket.io": "^2.1.2",
     "@types/fs-extra": "^5.0.5",
     "@types/ioredis": "^4.0.10",
     "@types/js-yaml": "^3.12.1",
