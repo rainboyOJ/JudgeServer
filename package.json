@@ -5,6 +5,9 @@
   "repository": "git@github.com:wariii-online-judge/JudgeServer.git",
   "author": "rainboy <rainboylvx@qq.com>",
   "license": "WTFPL",
+  "scripts": {
+      "debug":"nodemon"
+  },
   "dependencies": {
     "koa-route-ex": "https://github.com/wariii-online-judge/koa-route-ex.git",
     "fs-extra": "^7.0.1",
