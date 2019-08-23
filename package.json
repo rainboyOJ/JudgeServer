@@ -6,15 +6,15 @@
   "author": "rainboy <rainboylvx@qq.com>",
   "license": "WTFPL",
   "scripts": {
-      "debug":"nodemon"
+    "debug": "nodemon"
   },
   "dependencies": {
-    "koa-route-ex": "https://github.com/wariii-online-judge/koa-route-ex.git",
     "fs-extra": "^7.0.1",
     "ioredis": "^4.9.0",
     "js-yaml": "^3.13.1",
     "koa": "^2.8.1",
     "koa-logger": "^3.2.0",
+    "koa-route-ex": "https://github.com/wariii-online-judge/koa-route-ex.git",
     "lodash": "^4.17.11",
     "nodemon": "^1.18.11",
     "package.json": "^2.0.1",
@@ -23,7 +23,6 @@
     "string-format": "^2.0.0"
   },
   "devDependencies": {
-    "@types/socket.io": "^2.1.2",
     "@types/fs-extra": "^5.0.5",
     "@types/ioredis": "^4.0.10",
     "@types/js-yaml": "^3.12.1",
@@ -32,6 +31,8 @@
     "@types/lodash": "^4.14.123",
     "@types/node": "^11.13.8",
     "@types/shortid": "^0.0.29",
+    "@types/socket.io": "^2.1.2",
+    "@types/socket.io-client": "^1.4.32",
     "@types/string-format": "^2.0.0",
     "socket.io-client": "^2.2.0",
     "ts-node": "^8.3.0",

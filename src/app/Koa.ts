@@ -5,6 +5,15 @@ import * as logger from 'koa-logger'
 export const createServer = ():Koa => {
     var app = new Koa()
     app.use(logger())
+
+    app.use(async function(ctx,next){
+        if( ctx.method == 'GET' && ctx.path === '/')
+            ctx.body = 'judgeServer Index'
+        else
+            await next();
+    })
+
+
     return app;
 }
 
