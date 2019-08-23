@@ -1,0 +1,8 @@
+{
+  "name": "JudgeServer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:wariii-online-judge/JudgeServer.git",
+  "author": "rainboy <rainboylvx@qq.com>",
+  "license": "WTFPL"
+}
