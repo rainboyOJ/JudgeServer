@@ -1,6 +1,7 @@
 import * as socket from 'socket.io'
 import * as Koa from 'koa'
 import * as http from 'http'
+import debug from '../lib/debug'
 
 
 export const createSocket = (app:Koa) => {
@@ -9,15 +10,18 @@ export const createSocket = (app:Koa) => {
 
     
     io.on('connection', function(socket){
+        debug(`${socket.id} connected!`)
 
         /**  */
         socket.on('judge',function(this:socket.Socket,data:CTX.post_judge_data){
-            console.log(this.id)
+            debug(this.id)
+        })
+        socket.on('disconnect', function(this:socket.Socket,reason){
+            debug(`${this.id} disconnected.\n\treason : ${reason}`)
         })
 
-        socket.on('connection',function(){
-        })
     })
+
 
     return {
         server,
