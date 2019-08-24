@@ -21,8 +21,8 @@ class config {
         this.CONFIG = undefined
     }
 
-    get_config(){
-        return {...this.CONFIG}
+    get_config():CONFIG{
+        return <CONFIG>{...this.CONFIG}
     }
 
     get_languge_template(lang:string){

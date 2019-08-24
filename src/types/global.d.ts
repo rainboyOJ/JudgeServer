@@ -66,6 +66,12 @@ declare namespace CTX {
     }
 }
 
+interface MYREDIS_constructor_params {
+    subscribe?: string ,
+    publish?: string ,
+    compile_queue?: string ,
+    judge_queue?: string 
+}
 
 interface CONFIG {
     JUDGE_BASE_PATH:string
@@ -79,4 +85,6 @@ interface CONFIG {
             spj_judge_args:CTX.judge_args
         }
     }
+    REDIS:MYREDIS_constructor_params
 }
+
