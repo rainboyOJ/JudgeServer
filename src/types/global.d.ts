@@ -88,3 +88,18 @@ interface CONFIG {
     REDIS:MYREDIS_constructor_params
 }
 
+interface JUDGE_RESULT {
+    cpu_time: number
+    real_time: number
+    memory: number
+    signal: number
+    exit_code: number
+    result: number
+    error: number
+}
+
+interface JUDGE_RESULT_LIST {
+    socket_client_id:string
+    result_list:JUDGE_RESULT[]
+}
+
