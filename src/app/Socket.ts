@@ -10,9 +10,12 @@ export const createSocket = (app:Koa) => {
     
     io.on('connection', function(socket){
 
-        socket.on('message',function(this:socket.Socket,msg){
+        /**  */
+        socket.on('judge',function(this:socket.Socket,data:CTX.post_judge_data){
             console.log(this.id)
-            console.log(msg)
+        })
+
+        socket.on('connection',function(){
         })
     })
 
