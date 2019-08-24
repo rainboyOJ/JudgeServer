@@ -16,12 +16,15 @@ declare namespace CTX {
 
     interface config{
         type: "compile" | "judge"
-        uuid:string
-        socket_client_id:string
-        judge_path:string
-        base_path:string
-        data_path:string
-        src_path:string
+        uuid?:string
+        socket_client_id?:string
+        judge_path?:string
+        base_path?:string
+        data_path?:string
+        src_path?:string
+        input?:string
+        output?:string
+        point_num?:string |number
     }
 
     interface judge_args { //评测的数据参数类型

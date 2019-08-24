@@ -1,0 +1,51 @@
+# 进行数据评测的目录
+JUDGE_BASE_PATH: "/tmp/judge"
+
+# 数据存放的地址
+DATA_BASE_PATH: "/data"
+
+# socket 令牌
+TOKEN: token
+
+
+# 从队列中取数据的等待时间 ms
+COMPILE_QUEUE_DELAY_TIME: 2
+JUDGE_QUEUE_DELAY_TIME: 2
+
+
+# 语言模板
+LANGUGE_TEMPLATE:
+    cpp:
+        compile_args:
+            max_cpu_time: 10000
+            max_real_time: 30000
+            exe_path: "/usr/bin/g++"
+            max_memory: 536870912 # 512mb
+            max_stack: 536870912
+            max_output_size: 536870912
+            input_path: "/dev/null" 
+            output_path: "{judge_path}/output"
+            error_path: "{judge_path}/error_path"
+            log_path: "{judge_path}/compile_log"
+            args: 
+                - "-DONLINE_JUDGE"
+                - "-std=c++11"
+                - "{src_path}"
+                - "-lm"
+                - "-o"
+                - "{judge_path}/main"
+        spj_compile_args: ""
+        judge_args: 
+            max_cpu_time: 10000
+            max_real_time: 30000
+            exe_path: "{judge_path}/main"
+            max_memory: 536870912 # 512mb
+            max_stack: 536870912
+            max_output_size: 536870912
+            input_path: "{input}" 
+            output_path: "{output}"
+            error_path: "{judge_path}/{point_num}/error_path"
+            log_path: "{judge_path}/{point_num}/judge_log"
+            cwd: "{judge_path}/{point_num}"
+        spj_judge_args: ""
+
