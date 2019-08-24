@@ -3,6 +3,7 @@ import * as Koa from 'koa'
 import * as http from 'http'
 import debug from '../lib/debug'
 import config from '../lib/CONFIG'
+import Redis from './Redis'
 
 
 export const createSocket = (app:Koa) => {
@@ -29,6 +30,19 @@ export const createSocket = (app:Koa) => {
         /**  */
         socket.on('judge',function(this:socket.Socket,data:CTX.post_judge_data){
             debug(this.id)
+            debug(data)
+
+            //todo
+            // check data format
+
+            Redis.compile_push({
+                post_judge_data:data,
+                config:{
+                    type:'compile'
+                }
+            }).then( function(){
+                debug(`数据加入到 compile_queue`)
+            })
         })
         socket.on('disconnect', function(this:socket.Socket,reason){
             debug(`${this.id} disconnected.\n\treason : ${reason}`)

@@ -6,7 +6,8 @@
   "author": "rainboy <rainboylvx@qq.com>",
   "license": "WTFPL",
   "scripts": {
-    "debug": "DEBUG=debug nodemon"
+    "debug": "DEBUG=debug nodemon",
+    "debug_worker": "DEBUG=debug nodemon --config ./nodemon_worker.json"
   },
   "dependencies": {
     "debug": "^4.1.1",

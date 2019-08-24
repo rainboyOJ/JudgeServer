@@ -75,3 +75,8 @@ export function deep_format(obj:any_obj ,val:any_obj) {
     return o;
 }
 
+export async function delay(time:number){
+    return new Promise( (res)=>{
+        setTimeout(res,time)
+    })
+}

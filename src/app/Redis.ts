@@ -1,7 +1,6 @@
 import * as Redis from 'ioredis'
 import config from '../lib/CONFIG'
 import debug from '../lib/debug'
-import Redis from './Redis'
 
 
 export interface MYREDIS{
@@ -52,11 +51,17 @@ class myredis implements MYREDIS {
         /** 编译队列用连接*/
         if( opts.compile_queue){
             this.COMPILE_QUEUE = new Redis(opts.compile_queue)
+            this.COMPILE_QUEUE.on('connect',()=>{
+                debug('compile_queue connect success!')
+            })
         }
 
         /** 评测队列用连接 */
         if( opts.judge_queue){
             this.JUDGE_QUEUE = new Redis( opts.judge_queue)
+            this.JUDGE_QUEUE.on('connect',()=>{
+                debug('judge_queue connect success!')
+            })
         }
     }
 
@@ -75,6 +80,41 @@ class myredis implements MYREDIS {
         if( typeof(message) === 'string')
             return this.PUBLISH!.publish('publish_message',<string>message)
         return this.PUBLISH!.publish('publish_message',JSON.stringify(message))
+    }
+
+    /** 生产 */
+    compile_push(data:CTX.ctx){
+        return this.COMPILE_QUEUE!.lpush('compile_queue',JSON.stringify(data))
+    }
+
+    /** 消费 */
+    async compile_pop():Promise< CTX.ctx| null>{
+        // @ts-ignore
+        let res = await this.COMPILE_QUEUE!.brpop('compile_queue',config.CONFIG['COMPILE_QUEUE_DELAY_TIME'] || 2)
+        try {
+            return <CTX.ctx>JSON.parse(res[1])
+        }
+        catch(e){
+            return null
+        }
+    }
+
+    /** 生产:评测队列 */
+    judge_push(data:CTX.ctx){
+        return this.JUDGE_QUEUE!.lpush('judge_queue',JSON.stringify(data))
+    }
+
+    /** 消费:评测队列 */
+    async judge_pop():Promise<CTX.ctx | null>{
+        // @ts-ignore
+        let res = await this.JUDGE_QUEUE!.brpop('judge_queue',config.CONFIG['JUDGE_QUEUE_DELAY_TIME'] || 2)
+
+        try{
+            return <CTX.ctx>JSON.parse(res[1])
+        }
+        catch(e){
+            return null
+        }
     }
 }
 export default new myredis(config.get_config()['REDIS'])

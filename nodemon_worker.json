@@ -1,0 +1,6 @@
+{
+  "watch": ["src/worker.ts"],
+  "ext": "ts",
+  "ignore": ["src/*"],
+  "exec": "ts-node --files ./src/worker.ts"
+}
