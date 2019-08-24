@@ -66,3 +66,17 @@ declare namespace CTX {
     }
 }
 
+
+interface CONFIG {
+    JUDGE_BASE_PATH:string
+    DATA_BASE_PATH:string
+    TOKEN:string
+    LANGUGE_TEMPLATE: {
+        [key:string]: {
+            compile_args:CTX.judge_args
+            spj_compile_args:CTX.judge_args
+            judge_args:CTX.judge_args
+            spj_judge_args:CTX.judge_args
+        }
+    }
+}
