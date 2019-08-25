@@ -66,17 +66,26 @@ class myredis implements MYREDIS {
     }
 
     /** 监听信息 */
-    SUBSCRIBE_INIT(fn:any){
+    SUBSCRIBE_INIT(fn:Function){
         /** 先订阅 */
         this.SUBSCRIBE!.subscribe('publish_message',(err:any,count:number)=>{
             if(!err)
                 debug(`订阅成功 编号:${count}`)
         })
-        this.SUBSCRIBE!.on('message',fn)
+        this.SUBSCRIBE!.on('message',function(name:string,data:string){
+            try{
+                fn(JSON.parse(data))
+            }
+            catch(e){
+                console.error(`data must be JSON string!`)
+            }
+        })
     }
 
     /** 发布信息 */
     PUBLISH_MESSAGE(message:any):Promise<any>{
+        debug("==============================")
+        debug(message)
         if( typeof(message) === 'string')
             return this.PUBLISH!.publish('publish_message',<string>message)
         return this.PUBLISH!.publish('publish_message',JSON.stringify(message))
