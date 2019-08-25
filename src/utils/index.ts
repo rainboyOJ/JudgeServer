@@ -3,6 +3,9 @@ import * as jsyaml from 'js-yaml'
 import * as fs from 'fs'
 import * as pathFn from 'path'
 import * as format from 'string-format'
+import * as core from './core'
+
+export const maps_2_deal = core.maps_2_deal
 
 /** 加载yaml配置 */
 export function load_yaml(path:string){
