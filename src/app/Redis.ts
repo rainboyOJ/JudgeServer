@@ -36,7 +36,7 @@ class myredis implements MYREDIS {
         if (opts.publish){
             this.PUBLISH = new Redis(opts.publish)
             this.PUBLISH.on('connect',()=>{
-                debug('publish connect success!')
+                debug.debug('publish connect success!')
             })
         }
 
@@ -44,7 +44,7 @@ class myredis implements MYREDIS {
         if(opts.subscribe){
             this.SUBSCRIBE = new Redis(opts.subscribe)
             this.SUBSCRIBE.on('connect',()=>{
-                debug('subscribe optsnect success!')
+                debug.debug('subscribe optsnect success!')
             })
         }
 
@@ -52,7 +52,7 @@ class myredis implements MYREDIS {
         if( opts.compile_queue){
             this.COMPILE_QUEUE = new Redis(opts.compile_queue)
             this.COMPILE_QUEUE.on('connect',()=>{
-                debug('compile_queue connect success!')
+                debug.debug('compile_queue connect success!')
             })
         }
 
@@ -60,7 +60,7 @@ class myredis implements MYREDIS {
         if( opts.judge_queue){
             this.JUDGE_QUEUE = new Redis( opts.judge_queue)
             this.JUDGE_QUEUE.on('connect',()=>{
-                debug('judge_queue connect success!')
+                debug.debug('judge_queue connect success!')
             })
         }
     }
@@ -70,7 +70,7 @@ class myredis implements MYREDIS {
         /** 先订阅 */
         this.SUBSCRIBE!.subscribe('publish_message',(err:any,count:number)=>{
             if(!err)
-                debug(`订阅成功 编号:${count}`)
+                debug.debug(`订阅成功 编号:${count}`)
         })
         this.SUBSCRIBE!.on('message',function(name:string,data:string){
             try{
@@ -84,8 +84,8 @@ class myredis implements MYREDIS {
 
     /** 发布信息 */
     PUBLISH_MESSAGE(message:any):Promise<any>{
-        debug("==============================")
-        debug(message)
+        debug.detail("==============================")
+        debug.detail(message)
         if( typeof(message) === 'string')
             return this.PUBLISH!.publish('publish_message',<string>message)
         return this.PUBLISH!.publish('publish_message',JSON.stringify(message))

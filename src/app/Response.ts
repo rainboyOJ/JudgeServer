@@ -10,13 +10,11 @@ class response {
     }
 
     deal(res:RESPONSE){
-        debug("========== response ==========")
         let {socket_client_id} = res
         this.send(socket_client_id,res)
     }
 
     send(id:string,data:RESPONSE){
-        debug(id)
         if(this.nsp.sockets[id])
             this.nsp.sockets[id].emit('judge_response',data)
         else

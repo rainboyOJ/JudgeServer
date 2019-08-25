@@ -17,19 +17,19 @@ export const createSocket = (app:Koa) => {
             next()
         } else {
             console.error(`close ${socket.id} connection, \n\t reason: invalid token`)
-            debug(` query token: ${token}\n config token: ${TOKEN}`)
+            debug.debug(` query token: ${token}\n config token: ${TOKEN}`)
             socket.disconnect()
         }
     });
 
     
     io.on('connection', function(socket){
-        debug(`${socket.id} connected!`)
+        debug.debug(`${socket.id} connected!`)
 
         /**  */
         socket.on('judge',function(this:socket.Socket,data:CTX.post_judge_data){
-            debug(this.id)
-            debug(data)
+            debug.detail(this.id)
+            debug.detail(data)
 
             //todo
             // check data format
@@ -41,12 +41,12 @@ export const createSocket = (app:Koa) => {
                     socket_client_id:this.id
                 }
             }).then( function(){
-                debug(`数据加入到 compile_queue`)
+                debug.debug(`数据加入到 compile_queue`)
             })
         })
 
         socket.on('disconnect', function(this:socket.Socket,reason){
-            debug(`${this.id} disconnected.\n\treason : ${reason}`)
+            debug.debug(`${this.id} disconnected.\n\treason : ${reason}`)
         })
 
     })
