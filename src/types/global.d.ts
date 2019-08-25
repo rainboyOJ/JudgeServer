@@ -98,8 +98,10 @@ interface JUDGE_RESULT {
     error: number
 }
 
-interface JUDGE_RESULT_LIST {
+interface RESPONSE {
     socket_client_id:string
+    result: number      // 0 ok 1 compile_error
+    message: string
     result_list:JUDGE_RESULT[]
 }
 

@@ -15,8 +15,7 @@ export const createSocket = (app:Koa) => {
         let {TOKEN} = <CONFIG>config.get_config()
         if( token == TOKEN){
             next()
-        }
-        else {
+        } else {
             console.error(`close ${socket.id} connection, \n\t reason: invalid token`)
             debug(` query token: ${token}\n config token: ${TOKEN}`)
             socket.disconnect()
@@ -38,12 +37,14 @@ export const createSocket = (app:Koa) => {
             Redis.compile_push({
                 post_judge_data:data,
                 config:{
-                    type:'compile'
+                    type:'compile',
+                    socket_client_id:this.id
                 }
             }).then( function(){
                 debug(`数据加入到 compile_queue`)
             })
         })
+
         socket.on('disconnect', function(this:socket.Socket,reason){
             debug(`${this.id} disconnected.\n\treason : ${reason}`)
         })

@@ -1,6 +1,8 @@
 import { createServer } from './app/Koa'
 import {createSocket} from './app/Socket'
-
+import Redis from './app/Redis'
+import Response from './app/Response'
+import response from './app/Response';
 
 async function main(){
     try {
@@ -15,6 +17,12 @@ async function main(){
             }
             else
                 await next();
+        })
+
+        /**  Redis 订阅*/
+        var response = new Response(nsp)
+        Redis.SUBSCRIBE_INIT((name:string,data:RESPONSE)=>{
+            response.deal(data)
         })
 
 

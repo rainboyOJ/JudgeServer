@@ -12,6 +12,11 @@ async function main(){
             debug('取出 judge_queue 里的数据')
             debug(judge_ctx)
 
+            await Redis.PUBLISH_MESSAGE({
+                socket_client_id:judge_ctx.config!.socket_client_id,
+                result:0
+            })
+
         }
         else{
             debug('没有 从取出 judge_queue 里的数据')
@@ -19,6 +24,8 @@ async function main(){
             if( compile_ctx != null){
                 debug('取出 compile_queue 里的数据')
                 debug(compile_ctx)
+
+                await Redis.judge_push(compile_ctx)
 
             }
             else {

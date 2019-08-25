@@ -22,3 +22,7 @@ var post_data = {
 
 
 client.emit("judge",post_data)
+
+client.on("judge_response",function(data:any){
+    console.log(data)
+})
