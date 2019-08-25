@@ -1807,8 +1807,8 @@ koa-logger@^3.2.0:
     passthrough-counter "^1.0.0"
 
 "koa-route-ex@https://github.com/wariii-online-judge/koa-route-ex.git":
-  version "1.0.2"
-  resolved "https://github.com/wariii-online-judge/koa-route-ex.git#46f3532bbf551e2940c11f94823d011d406cb7c9"
+  version "1.0.3"
+  resolved "https://github.com/wariii-online-judge/koa-route-ex.git#43be342b589ff2a627f972a7e134a7b45f8f227e"
   dependencies:
     debug "^4.1.1"
     path-to-regexp "^3.0.0"
