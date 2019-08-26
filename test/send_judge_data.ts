@@ -8,8 +8,10 @@ client.on('connect',()=>{
     console.log('connected!')
 })
 
+var code = readFileSync(__dirname+'/a+b.cpp',{encoding:"utf-8"})
+console.log(code)
 var post_data = {
-    code: readFileSync(__dirname+'/a+b.cpp',{encoding:"utf-8"}),
+    code,
     id: "a+b",
     lang: "cpp",
     memory: 128, //mb
@@ -19,6 +21,7 @@ var post_data = {
     auto_io:true,//是否使用 noi 手动读入数据
     file_io:"a+b"// 如果auto_io 为false 那么这个必须不能为空
 }
+console.log(post_data.code)
 
 
 client.emit("judge",post_data)

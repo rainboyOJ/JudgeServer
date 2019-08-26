@@ -6,18 +6,18 @@ declare namespace CTX {
         id: number | string
         lang: string
         code: string
-        memory: number      //mb
-        time: number        //ms
-        stack: number       //mb
-        spj: string
+        memory?: number      //mb
+        time?: number        //ms
+        stack?: number       //mb
+        spj?: string
         auto_io?:boolean//是否使用 noi 手动读入数据
         file_io?:string  // 如果auto_io 为false 那么这个必须不能为空
     }
 
     interface config{
         type: "compile" | "judge"
+        socket_client_id:string
         uuid?:string
-        socket_client_id?:string
         judge_path?:string
         base_path?:string
         data_path?:string
@@ -77,6 +77,15 @@ interface CONFIG {
     JUDGE_BASE_PATH:string
     DATA_BASE_PATH:string
     TOKEN:string
+    DEFAULT_POST_JUDGE_ARGS: {
+        id: string
+        lang: string
+        memory: number
+        time: number
+        stack: number
+        spj: string
+        auto_io: boolean
+    }
     LANGUGE_TEMPLATE: {
         [key:string]: {
             compile_args:CTX.judge_args
@@ -102,6 +111,6 @@ interface RESPONSE {
     socket_client_id:string
     result: number      // 0 ok 1 compile_error
     message: string
-    result_list:JUDGE_RESULT[]
+    result_list?:JUDGE_RESULT[]
 }
 

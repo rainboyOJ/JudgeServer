@@ -22,6 +22,7 @@ async function main(){
 
             await Redis.PUBLISH_MESSAGE({
                 socket_client_id:judge_ctx.config!.socket_client_id,
+                message:'',
                 result:0
             })
 

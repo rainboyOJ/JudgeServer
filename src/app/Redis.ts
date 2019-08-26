@@ -83,7 +83,7 @@ class myredis implements MYREDIS {
     }
 
     /** 发布信息 */
-    PUBLISH_MESSAGE(message:any):Promise<any>{
+    PUBLISH_MESSAGE(message:RESPONSE):Promise<any>{
         debug.detail("==============================")
         debug.detail(message)
         if( typeof(message) === 'string')

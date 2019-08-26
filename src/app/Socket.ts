@@ -5,6 +5,23 @@ import debug from '../lib/debug'
 import config from '../lib/CONFIG'
 import Redis from './Redis'
 
+function check_post_judge_data(data:CTX.post_judge_data):CTX.post_judge_data{
+    /** 是否缺少 */
+    let default_args  = config.get_config()['DEFAULT_POST_JUDGE_ARGS'];
+
+    let args = {...default_args,...data}
+    
+    if( !args.code || args.code.length < 50){
+        throw('没有提交代码,或代码长度不够(>50)')
+    }
+
+    if( !args.auto_io  && !args.file_io){
+        throw('auto_io为false时,file_io必须指明')
+    }
+
+    return args;
+}
+
 
 export const createSocket = (app:Koa) => {
     const server = http.createServer(app.callback())
@@ -25,7 +42,7 @@ export const createSocket = (app:Koa) => {
     
     io.on('connection', function(socket){
         debug.debug(`${socket.id} connected!`)
-
+        
         /**  */
         socket.on('judge',function(this:socket.Socket,data:CTX.post_judge_data){
             debug.detail(this.id)
@@ -33,9 +50,25 @@ export const createSocket = (app:Koa) => {
 
             //todo
             // check data format
+            let checked_data:CTX.post_judge_data
+            try{
+                checked_data = check_post_judge_data(data)
+                debug.debug("======== post_judge_data Checked OK!")
+                //debug.debug(checked_data);
+                //debug.debug(JSON.stringify(checked_data,null,3));
+            }
+            catch(e){
+                Redis.PUBLISH_MESSAGE({
+                    socket_client_id:<string>this.id,
+                    result:-1,
+                    message:e.message || e,
+                    result_list:[]
+                });
+                return;
+            }
 
             Redis.compile_push({
-                post_judge_data:data,
+                post_judge_data:checked_data,
                 config:{
                     type:'compile',
                     socket_client_id:this.id
