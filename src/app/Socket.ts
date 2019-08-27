@@ -69,6 +69,8 @@ export const createSocket = (app:Koa) => {
 
             Redis.compile_push({
                 post_judge_data:checked_data,
+                method:'GET',
+                path:'/compile',
                 config:{
                     type:'compile',
                     socket_client_id:this.id

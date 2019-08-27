@@ -8,8 +8,14 @@ debug.debug("=== start worker ===")
 
 /** 注册 函数 */
 maps_2_deal(__dirname +'/Function',[/^_/],function(data:any){
+    debug.debug(`注册函数: namespace : ${data.rpath},name: ${data.basename} `)
     routeIns.register(require(data.full_path), data.rpath)
 })
+
+// @ts-ignore
+var compile_routes = routeIns.create('/compile',[
+    "compile.uuid"
+])
 
 
 async function main(){
@@ -33,6 +39,11 @@ async function main(){
             if( compile_ctx != null){
                 debug.debug('取出 compile_queue 里的数据')
                 debug.detail(compile_ctx)
+
+
+                //@ts-ignore
+                await compile_routes.routes()(compile_ctx, async ()=>{ console.log("failed")})
+
 
                 await Redis.judge_push(compile_ctx)
 

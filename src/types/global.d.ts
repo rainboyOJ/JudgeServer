@@ -57,8 +57,10 @@ declare namespace CTX {
     }
 
     interface ctx {
-        post_judge_data?:   post_judge_data
-        config?:            config
+        method: 'GET'
+        path: string
+        post_judge_data:    post_judge_data
+        config:             config
         compile_args?:      judge_args
         spj_compile_arg?:   judge_args
         spj_judge_args?:    judge_args
