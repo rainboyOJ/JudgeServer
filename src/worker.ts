@@ -14,7 +14,8 @@ maps_2_deal(__dirname +'/Function',[/^_/],function(data:any){
 
 // @ts-ignore
 var compile_routes = routeIns.create('/compile',[
-    "compile.uuid"
+    "compile.uuid",
+    "compile.generate_path_args"
 ])
 
 
@@ -42,7 +43,11 @@ async function main(){
 
 
                 //@ts-ignore
-                await compile_routes.routes()(compile_ctx, async ()=>{ console.log("failed")})
+                await compile_routes.routes()(compile_ctx, async (ctx:any)=>{ 
+                    console.log("==================================================================")
+                    console.log(ctx)
+                    console.log("==================================================================")
+                })
 
 
                 await Redis.judge_push(compile_ctx)
