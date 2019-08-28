@@ -61,6 +61,13 @@ class mydebug {
         }
         return null;
     }
+    msg(msg:string):string{
+        let callerInfo = this._getCaller() || {}
+        //@ts-ignore
+        //this.DETAIL(callerInfo.module, callerInfo.function, callerInfo.line, msg,)
+        //@ts-ignore
+        return `ERROR at: [${callerInfo.module}] [line:${callerInfo.line}] ==> ${msg}`
+    }
 }
 
 
