@@ -16,7 +16,9 @@ maps_2_deal(__dirname +'/Function',[/^_/],function(data:any){
 var compile_routes = routeIns.create('/compile',[
     "compile.uuid",
     "compile.generate_path_args",
-    "compile.generatre_compile_args"
+    "compile.generatre_compile_args",
+    "compile.data_validate",
+
 ])
 
 
@@ -42,16 +44,24 @@ async function main(){
                 debug.debug('取出 compile_queue 里的数据')
                 debug.detail(compile_ctx)
 
+                try {
+                    //@ts-ignore
+                    await compile_routes.routes()(compile_ctx, async (ctx:any)=>{ 
+                        console.log("============ compile_routes exec END ==================================")
+                        console.log(ctx)
+                        console.log("==================================================================")
+                    })
+                    await Redis.judge_push(compile_ctx)
+                }
+                catch(e){
+                    Redis.PUBLISH_MESSAGE({
+                        socket_client_id:compile_ctx!.config.socket_client_id,
+                        result:-1,
+                        message:e.message || e,
+                        result_list:[]
+                    });
+                }
 
-                //@ts-ignore
-                await compile_routes.routes()(compile_ctx, async (ctx:any)=>{ 
-                    console.log("============ compile_routes exec END ==================================")
-                    console.log(ctx)
-                    console.log("==================================================================")
-                })
-
-
-                await Redis.judge_push(compile_ctx)
 
             }
             else {
