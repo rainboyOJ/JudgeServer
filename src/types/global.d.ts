@@ -1,3 +1,4 @@
+
 interface any_obj {
     [k :string]:any
 }
@@ -65,6 +66,7 @@ declare namespace CTX {
         spj_compile_arg?:   judge_args
         spj_judge_args?:    judge_args
         judge_args_array?:  judge_args[]
+        data_list?:  [string,string][]
     }
 }
 
