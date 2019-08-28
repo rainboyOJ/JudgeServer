@@ -4,6 +4,7 @@ import * as http from 'http'
 import debug from '../lib/debug'
 import config from '../lib/CONFIG'
 import Redis from './Redis'
+import get_lang_ext from '../lib/get_lang_ext'
 
 function check_post_judge_data(data:CTX.post_judge_data):CTX.post_judge_data{
     /** 是否缺少 */
@@ -18,6 +19,9 @@ function check_post_judge_data(data:CTX.post_judge_data):CTX.post_judge_data{
     if( !args.auto_io  && !args.file_io){
         throw('auto_io为false时,file_io必须指明')
     }
+
+    /** 检查是不是 支持的语言 */
+    get_lang_ext(args.lang)
 
     return args;
 }

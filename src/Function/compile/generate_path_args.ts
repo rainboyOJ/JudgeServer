@@ -3,17 +3,9 @@
  * */
 import config from '../../lib/CONFIG'
 import {join} from 'path'
-import debug from '../../lib/debug'
+//import debug from '../../lib/debug'
+import get_lang_ext from '../../lib/get_lang_ext'
 
-const lang_ext_map =  {
-    'cpp': 'cpp',
-    'c++':'cpp',
-    'c':'c',
-    'python':'py',
-    'javascript':'js',
-    'js':'js',
-    "nodejs":'js'
-}
 
 export = async function generate_path_args(ctx:CTX.ctx,next:Function){
 
@@ -27,20 +19,9 @@ export = async function generate_path_args(ctx:CTX.ctx,next:Function){
         ctx.post_judge_data.id+''
     )
 
-    let lang = ctx.post_judge_data.lang.toLowerCase();
-    if(lang_ext_map.hasOwnProperty(lang)){
-        ctx.config.src_path = join(
-            ctx.config.judge_path,
-            //@ts-ignore
-            "main."+ lang_ext_map[lang]
-        )
-    }
-    else{
-        let message = `ctx.post_judge_data.lang : ${ctx.post_judge_data.lang} 并不支持这种语言!`
-        debug.debug(message)
-        throw(message)
-        return
-    }
-
+    ctx.config.src_path = join(
+        ctx.config.judge_path,
+        "main."+ get_lang_ext(ctx.post_judge_data.lang)
+    )
     await next()
 }
