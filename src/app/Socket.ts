@@ -16,8 +16,8 @@ function check_post_judge_data(data:CTX.post_judge_data):CTX.post_judge_data{
         throw('没有提交代码,或代码长度不够(>50)')
     }
 
-    if( !args.auto_io  && !args.file_io){
-        throw('auto_io为false时,file_io必须指明')
+    if( !args.auto_io  && (!args.file_in || !args.file_out )){
+        throw('auto_io为false时,file_in,file_out必须指明')
     }
 
     /** 检查是不是 支持的语言 */

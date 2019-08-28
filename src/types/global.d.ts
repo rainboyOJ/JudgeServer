@@ -12,7 +12,8 @@ declare namespace CTX {
         stack?: number       //mb
         spj?: string
         auto_io?:boolean//是否使用 noi 手动读入数据
-        file_io?:string  // 如果auto_io 为false 那么这个必须不能为空
+        file_in?:string  // 如果auto_io 为false 那么这个必须不能为空
+        file_out?:string  // 如果auto_io 为false 那么这个必须不能为空
     }
 
     interface config{
