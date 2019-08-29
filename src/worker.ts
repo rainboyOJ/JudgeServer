@@ -18,6 +18,7 @@ var compile_routes = routeIns.create('/compile',[
     "compile.generate_path_args",
     "compile.generatre_compile_args",
     "compile.data_validate",
+    "compile.create_data_dir_and_file",
 
 ])
 
