@@ -3,6 +3,9 @@ const lang_ext_map = new Map([
     ['c++','cpp'],
     ['c','c'],
     ['python','py'],
+    ['python3','py'],
+    ['py','py'],
+    ['py3','py'],
     ['javascript','js'],
     ['js','js'],
     ["nodejs",'js']
