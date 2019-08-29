@@ -24,8 +24,10 @@ declare namespace CTX {
         base_path?:string
         data_path?:string
         src_path?:string
+        spj_src_path?:string
         input?:string
         output?:string
+        user_output?:string
         point_num?:string |number
     }
 
@@ -58,6 +60,10 @@ declare namespace CTX {
         }
     }
 
+    type input = string         //输入
+    type output = string        //输出
+    type user_output = string   //用户输出
+
     interface ctx {
         method: 'GET'
         path: string
@@ -68,6 +74,7 @@ declare namespace CTX {
         spj_judge_args?:    judge_args
         judge_args_array?:  judge_args[]
         data_list?:  [string,string][]
+        judge_data_list?:  [input,output,user_output][]
     }
 }
 
