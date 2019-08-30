@@ -16,10 +16,10 @@ maps_2_deal(__dirname +'/Function',[/^_/],function(data:any){
 var compile_routes = routeIns.create('/compile',[
     "compile.uuid",
     "compile.generate_path_args",
+    "compile.generate_spj_args",    //spj_ext ,spj_path,spj_src_path
     "compile.generate_compile_args",
     "compile.data_validate",
     "compile.create_data_dir_and_file",
-
 ])
 
 

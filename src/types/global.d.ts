@@ -10,7 +10,7 @@ declare namespace CTX {
         memory?: number      //mb
         time?: number        //ms
         stack?: number       //mb
-        spj?: string
+        spj?: string | 'INNER' //inner 表示使用数据目录内部的spj
         auto_io?:boolean//是否使用 noi 手动读入数据
         file_in?:string  // 如果auto_io 为false 那么这个必须不能为空
         file_out?:string  // 如果auto_io 为false 那么这个必须不能为空
@@ -24,6 +24,8 @@ declare namespace CTX {
         base_path?:string
         data_path?:string
         src_path?:string
+        spj_ext?:string     // spj 的后缀 
+        spj_path?:string
         spj_src_path?:string
         input?:string
         output?:string
@@ -70,7 +72,7 @@ declare namespace CTX {
         post_judge_data:    post_judge_data
         config:             config
         compile_args?:      judge_args
-        spj_compile_arg?:   judge_args
+        spj_compile_arg?:   judge_args | null
         spj_judge_args?:    judge_args
         judge_args_array?:  judge_args[]
         data_list?:  [string,string][]
@@ -98,6 +100,7 @@ interface CONFIG {
         spj: string
         auto_io: boolean
     }
+    DEFAULT_SPJ: string
     LANGUGE_TEMPLATE: {
         [key:string]: {
             compile_args:CTX.judge_args

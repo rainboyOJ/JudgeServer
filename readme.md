@@ -17,3 +17,13 @@ cp config_default.yaml config.yaml
 npm run start
 ```
 
+
+## spj
+
+可以使用默认的testlib的spj
+
+也可以的数据目录文件夹内,放入
+
+ - spj.cpp
+ - spj.py
+ - spj.js
