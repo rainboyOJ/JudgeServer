@@ -11,8 +11,10 @@ export = async function generate_compile_args(ctx:CTX.ctx,next:Function){
 
     if( lang_template.hasOwnProperty(lang)){
         let compile_args = {...lang_template[lang].compile_args}
-        //@ts-ignore
-        ctx.compile_args = deep_format(compile_args,ctx.config)
+        if( compile_args ){ // 如果 compile_args == null 就表示不用编译
+            //@ts-ignore
+            ctx.compile_args = deep_format(compile_args,ctx.config)
+        }
 
         //ctx.spj_compile_arg 
         // 如果 是 默认的spj 就不需要编译
