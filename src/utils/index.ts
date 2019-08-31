@@ -86,3 +86,15 @@ export async function delay(time:number){
         setTimeout(res,time)
     })
 }
+
+/** 返回第一个读取的非空文件的内容 */
+export function read_file_queue(...paths:string[]):string | undefined{
+    for( let path of paths){
+        if( fs.existsSync(path)){
+            let file = fs.readFileSync(path,{encoding:'utf-8'})
+            if( file.length)
+                return file
+        }
+    }
+    return undefined
+}
