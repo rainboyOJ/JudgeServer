@@ -11,18 +11,18 @@ const default_inner_spj = {
     "spj.cpp": {
         spj_ext:'cpp',
         spj_path:`{judge_path}/spj`,
-        spj_src_path:`{dta_path}/spj.cpp`
+        spj_src_path:`{data_path}/spj.cpp`
     },
     "spj.py": {
         spj_ext:'py',
         spj_path:`{data_path}/spj.py`,
-        spj_src_path:`{dta_path}/spj.py`
+        spj_src_path:`{data_path}/spj.py`
     },
     "spj.js": {
         name:'spj.js',
         spj_ext:'js',
         spj_path:`{data_path}/spj.js`,
-        spj_src_path:`{dta_path}/spj.js`
+        spj_src_path:`{data_path}/spj.js`
     }
 }
 export = async function generate_spj_args(ctx:CTX.ctx,next:Function){

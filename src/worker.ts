@@ -18,8 +18,13 @@ var compile_routes = routeIns.create('/compile',[
     "compile.generate_path_args",
     "compile.generate_spj_args",    //spj_ext ,spj_path,spj_src_path
     "compile.generate_compile_args",
+    "compile.generate_spj_compile_args",    // 生成 ctx.spj_compile_arg
     "compile.data_validate",
     "compile.create_data_dir_and_file",
+    // 生成 源代码
+    // 编译源代码
+    //编译spj源代码
+    //生成每个测试点的 ctx
 ])
 
 
