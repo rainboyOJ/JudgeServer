@@ -73,7 +73,7 @@ declare namespace CTX {
         post_judge_data:    post_judge_data
         config:             config
         compile_args?:      judge_args
-        spj_compile_arg?:   judge_args | null
+        spj_compile_args?:   judge_args | null
         spj_judge_args?:    judge_args
         judge_args_array?:  judge_args[]
         data_list?:  [string,string][]

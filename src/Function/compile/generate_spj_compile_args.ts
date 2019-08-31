@@ -14,7 +14,7 @@ export = async function generate_spj_compile_args(ctx:CTX.ctx,next:Function){
         let spj_compile_args = {...lang_template[<string>spj_ext].spj_compile_args}
         if( spj_compile_args ){
             //@ts-ignore
-            ctx.spj_compile_arg =  deep_format(spj_compile_args,ctx.config)
+            ctx.spj_compile_args =  deep_format(spj_compile_args,ctx.config)
         }
     }
     else 

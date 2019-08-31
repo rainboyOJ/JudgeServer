@@ -22,8 +22,8 @@ var compile_routes = routeIns.create('/compile',[
     "compile.data_validate",
     "compile.create_data_dir_and_file",
     "compile.create_src",                   // 生成 源代码
-    "compile.compile_src"                   // 编译源代码
-    //编译spj源代码
+    "compile.compile_src",                  // 编译源代码
+    "compile.compile_spj_src"               //编译spj源代码
     //生成每个测试点的 ctx
 ])
 
