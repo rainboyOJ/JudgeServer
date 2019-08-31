@@ -1,4 +1,3 @@
-
 interface any_obj {
     [k :string]:any
 }
@@ -44,9 +43,12 @@ declare namespace CTX {
         input_path?:string
         output_path?:string
         error_path?:string
+        log_path?:string
         args?:string[]
         env?:string[]
         cwd?: string
+        gid?: number,
+        uid?: number,
     }
 
     interface judge_type_data {
@@ -121,9 +123,14 @@ interface JUDGE_RESULT {
     error: number
 }
 
+type INTERNAL_SERVER_ERROR= -1
+type OK = 0
+type COMPILE_ERROR = 1
+type SPJ_COMPILE_ERROR = 2
+
 interface RESPONSE {
     socket_client_id:string
-    result: number      // 0 ok 1 compile_error
+    result: INTERNAL_SERVER_ERROR | OK | COMPILE_ERROR | SPJ_COMPILE_ERROR // 0 ok 1 compile_error
     message: string
     result_list?:JUDGE_RESULT[]
 }
