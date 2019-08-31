@@ -73,6 +73,9 @@ export function deep_format(obj:any_obj ,val:any_obj) {
         else if(typeof(obj[k]) == "object"){
             o[k] = deep_format(obj[k],val);
         }
+        else {
+            o[k] = obj[k]
+        }
     }
 
     return o;
