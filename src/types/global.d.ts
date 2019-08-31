@@ -25,7 +25,6 @@ declare namespace CTX {
         data_path?:string
         src_path?:string
         spj_ext?:string     // spj 的后缀 
-        spj_path?:string
         spj_src_path?:string
         input?:string
         output?:string

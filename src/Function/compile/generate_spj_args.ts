@@ -10,18 +10,15 @@ import config from '../../lib/CONFIG'
 const default_inner_spj = {
     "spj.cpp": {
         spj_ext:'cpp',
-        spj_path:`{judge_path}/spj`,
         spj_src_path:`{data_path}/spj.cpp`
     },
     "spj.py": {
         spj_ext:'py',
-        spj_path:`{data_path}/spj.py`,
         spj_src_path:`{data_path}/spj.py`
     },
     "spj.js": {
         name:'spj.js',
         spj_ext:'js',
-        spj_path:`{data_path}/spj.js`,
         spj_src_path:`{data_path}/spj.js`
     }
 }
@@ -40,9 +37,8 @@ export = async function generate_spj_args(ctx:CTX.ctx,next:Function){
             if( data_file_list.indexOf(inner_spj_name) !== -1){
                 //ctx.config.spj_ext = 
                 //@ts-ignore
-                let {spj_ext,spj_path,spj_src_path} = default_inner_spj[inner_spj_name];
+                let {spj_ext,spj_src_path} = default_inner_spj[inner_spj_name];
                 ctx.config.spj_ext = spj_ext
-                ctx.config.spj_path = format(spj_path,ctx.config)
                 ctx.config.spj_src_path = format(spj_src_path,ctx.config)
                 await next()
                 return
@@ -64,7 +60,6 @@ export = async function generate_spj_args(ctx:CTX.ctx,next:Function){
             ctx.config.spj_ext = 'testlib'
 
             ctx.config.spj_src_path = 
-                ctx.config.spj_path = 
                     join(default_spj_path,spj_name);
         }
         else
