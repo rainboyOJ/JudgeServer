@@ -16,13 +16,13 @@ maps_2_deal(__dirname +'/Function',[/^_/],function(data:any){
 var compile_routes = routeIns.create('/compile',[
     "compile.uuid",
     "compile.generate_path_args",
-    "compile.generate_spj_args",            //spj_ext ,spj_path,spj_src_path
+    "compile.generate_spj_args",            // spj_ext ,spj_path,spj_src_path
     "compile.generate_compile_args",
     "compile.generate_spj_compile_args",    // 生成 ctx.spj_compile_arg
     "compile.data_validate",
     "compile.create_data_dir_and_file",
-    "compile.create_src"                    // 生成 源代码
-    // 编译源代码
+    "compile.create_src",                   // 生成 源代码
+    "compile.compile_src"                   // 编译源代码
     //编译spj源代码
     //生成每个测试点的 ctx
 ])
@@ -62,7 +62,7 @@ async function main(){
                 catch(e){
                     Redis.PUBLISH_MESSAGE({
                         socket_client_id:compile_ctx!.config.socket_client_id,
-                        result:-1,
+                        result: e.result || -1,
                         message:e.message || e,
                         result_list:[]
                     });
