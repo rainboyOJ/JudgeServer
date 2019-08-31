@@ -8,10 +8,27 @@ git clone https://github.com/wariii-online-judge/JudgeServer.git
 cd JudgeServer
 git submodule init
 git submodule update
+
+```
+
+安装testlib
+```
 cd testlib
 ./install.sh
 cd ..
-npm run build_all
+```
+
+安装Judger
+
+```
+cd Judger
+mkdir build && cd build
+cmake .. && make && sudo make install
+cd ../bindings/NodeJS/
+npm run build
+```
+
+```
 cp config_default.yaml config.yaml
 # change config.yaml
 npm run start
