@@ -26,7 +26,7 @@ export = async function generate_each_point_judge_args(ctx:CTX.ctx,next:Function
 
     if( ctx.post_judge_data.stack)
         user_set_judge_args['max_stack'] = ctx.post_judge_data.stack * 1024 *1024
-    let arr = []
+    let arr:CTX.ctx[] = []
 
     for( let i =0,len = ctx.judge_data_list!.length;i<len ;i++){
         let [input,output,user_output] = ctx.judge_data_list![i]
@@ -46,11 +46,13 @@ export = async function generate_each_point_judge_args(ctx:CTX.ctx,next:Function
         let spj_judge_args = deep_format(spj_template,ctx_config)
 
         arr.push(
-            {
+            <CTX.ctx>{
                 ...ctx,
                 config: {...ctx_config,type:'judge'},
                 judge_args,
                 spj_judge_args,
+                method:'GET',
+                path:'/judge'
             }
         )
 
@@ -59,7 +61,7 @@ export = async function generate_each_point_judge_args(ctx:CTX.ctx,next:Function
     await Redis.set_judge_point(ctx.config.uuid!, arr.length)
     /** 加入的 评测队列 */
     for( let c of arr){
-        await Redis.judge_push(<CTX.ctx>c)
+        await Redis.judge_push(c)
     }
 
     await next();
