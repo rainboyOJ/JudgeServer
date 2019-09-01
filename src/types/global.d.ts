@@ -31,6 +31,16 @@ declare namespace CTX {
         point_num?:string |number
     }
 
+    interface result {
+        cpu_time: number
+        real_time: number
+        memory: number
+        signal: number
+        exit_code: number
+        error: number
+        result: number
+    }
+
     interface judge_args { //评测的数据参数类型
         max_cpu_time?:number
         max_real_time?:number
@@ -51,17 +61,6 @@ declare namespace CTX {
         uid?: number,
     }
 
-    interface judge_type_data {
-        type:'judge'
-        socket_client_id:string
-        raw:post_judge_data
-        compile_arg: judge_args
-        spj_compile_arg:judge_args
-        judge_point_arg:judge_args[]
-        judge_info: {
-            [k:string]:any
-        }
-    }
 
     type input = string         //输入
     type output = string        //输出
@@ -78,6 +77,7 @@ declare namespace CTX {
         spj_judge_args?:    judge_args
         data_list?:  [string,string][]
         judge_data_list?:  [input,output,user_output][]
+        result?:        result
     }
 }
 

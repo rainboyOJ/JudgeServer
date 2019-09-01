@@ -28,7 +28,10 @@ var compile_routes = routeIns.create('/compile',[
 ])
 
 //@ts-ignore
-var judge_routes = routeIns.create('/judge', [])
+var judge_routes = routeIns.create('/judge', [
+    "judge.judge",
+    "judge.spj",
+])
 
 
 async function main(){
@@ -75,7 +78,7 @@ async function main(){
                 });
             }
         }
-        await delay(1000);
+        await delay(100);
     }
 }
 
