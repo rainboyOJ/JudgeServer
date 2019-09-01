@@ -7,7 +7,8 @@
   "license": "WTFPL",
   "scripts": {
     "debug": "DEBUG=debug nodemon",
-    "debug_worker": "DEBUG=debug nodemon --config ./nodemon_worker.json"
+    "debug_worker": "DEBUG=debug nodemon --config ./nodemon_worker.json",
+    "debug_worker_detail": "DEBUG=debug,detail nodemon --config ./nodemon_worker.json"
   },
   "dependencies": {
     "debug": "^4.1.1",

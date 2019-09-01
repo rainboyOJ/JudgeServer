@@ -73,9 +73,9 @@ declare namespace CTX {
         post_judge_data:    post_judge_data
         config:             config
         compile_args?:      judge_args
+        judge_args?:         judge_args
         spj_compile_args?:   judge_args | null
         spj_judge_args?:    judge_args
-        judge_args_array?:  judge_args[]
         data_list?:  [string,string][]
         judge_data_list?:  [input,output,user_output][]
     }
@@ -102,6 +102,7 @@ interface CONFIG {
         auto_io: boolean
     }
     DEFAULT_SPJ: string
+    JUDGE_EXTRA_MEMORY: number
     LANGUGE_TEMPLATE: {
         [key:string]: {
             compile_args:CTX.judge_args

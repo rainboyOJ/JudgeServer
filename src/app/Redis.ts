@@ -5,8 +5,7 @@ import debug from '../lib/debug'
 
 export interface MYREDIS{
     /** 发布 用的Redis实例 */
-    PUBLISH: Redis.Redis | undefined
-
+    PUBLISH: Redis.Redis | undefined 
     /** 订阅 用的Redis实例 */
     SUBSCRIBE: Redis.Redis | undefined
 
@@ -111,6 +110,19 @@ class myredis implements MYREDIS {
     /** 生产:评测队列 */
     judge_push(data:CTX.ctx){
         return this.JUDGE_QUEUE!.lpush('judge_queue',JSON.stringify(data))
+    }
+
+    /** 设置 评测点的数量 */
+    set_judge_point(uuid:string,num:number){
+        return this.COMPILE_QUEUE!.set(`${uuid}-point-num`, num)
+    }
+
+    dec_judge_point(uuid:string){
+        return this.COMPILE_QUEUE!.decr(`${uuid}-point-num`)
+    }
+
+    del_judge_point(uuid:string){
+        return this.COMPILE_QUEUE!.del(`${uuid}-point-num`)
     }
 
     /** 消费:评测队列 */
