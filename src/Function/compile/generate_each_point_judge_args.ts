@@ -26,6 +26,14 @@ export = async function generate_each_point_judge_args(ctx:CTX.ctx,next:Function
 
     if( ctx.post_judge_data.stack)
         user_set_judge_args['max_stack'] = ctx.post_judge_data.stack * 1024 *1024
+
+
+    /** 是不是 auto_io */
+    if(!ctx.post_judge_data.auto_io){
+        user_set_judge_args.input_path = "/dev/stdin"
+        user_set_judge_args.output_path = "/dev/stdout"
+    }
+
     let arr:CTX.ctx[] = []
 
     for( let i =0,len = ctx.judge_data_list!.length;i<len ;i++){
@@ -41,6 +49,7 @@ export = async function generate_each_point_judge_args(ctx:CTX.ctx,next:Function
         let judge_args = deep_format(template,ctx_config)
         //@ts-ignore
         judge_args = {...judge_args,...user_set_judge_args}
+
 
         //@ts-ignore
         let spj_judge_args = deep_format(spj_template,ctx_config)

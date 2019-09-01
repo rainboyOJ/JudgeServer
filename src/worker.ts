@@ -15,7 +15,7 @@ maps_2_deal(__dirname +'/Function',[/^_/],function(data:any){
 // @ts-ignore
 var compile_routes = routeIns.create('/compile',[
     "compile.uuid",
-    "compile.generate_path_args",
+    "compile.generate_path_args",           // judge_path data_path src_path 
     "compile.generate_spj_args",            // spj_ext ,spj_path,spj_src_path
     "compile.generate_compile_args",
     "compile.generate_spj_compile_args",    // 生成 ctx.spj_compile_arg
