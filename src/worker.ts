@@ -31,6 +31,7 @@ var compile_routes = routeIns.create('/compile',[
 var judge_routes = routeIns.create('/judge', [
     "judge.judge",
     "judge.spj",
+    "judge.judge_end"
 ])
 
 
@@ -63,7 +64,7 @@ async function main(){
                 await judge_routes.routes()(pop_ctx,async (ctx:CTX.ctx | undefined)=>{
                     /** 评测结束,进行相关处理 */
                     if( ctx) {
-                        console.log(ctx)
+                        debug.detail(ctx)
                         // if ctx.judge_end === true
                         // REDIS.PUBLISH_MESSAGE
                     }

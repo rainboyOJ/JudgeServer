@@ -124,6 +124,17 @@ class myredis implements MYREDIS {
     del_judge_point(uuid:string){
         return this.COMPILE_QUEUE!.del(`${uuid}-point-num`)
     }
+    push_judge_result(uuid:string,result:CTX.save_result){
+        return this.COMPILE_QUEUE!.rpush(`${uuid}-judge_result`,JSON.stringify(result))
+    }
+
+    get_all_judge_result(uuid:string){
+        return this.COMPILE_QUEUE!.lrange(`${uuid}-judge_result`, 0, -1)
+    }
+
+    del_all_judge_result(uuid:string){
+        return this.COMPILE_QUEUE!.del(`${uuid}-judge_result`)
+    }
 
     /** 消费:评测队列 */
     async judge_pop():Promise<CTX.ctx | null>{

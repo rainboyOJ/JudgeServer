@@ -41,6 +41,11 @@ declare namespace CTX {
         result: number
     }
 
+    interface save_result {
+        point_num:number
+        result:result
+    }
+
     interface judge_args { //评测的数据参数类型
         max_cpu_time?:number
         max_real_time?:number
