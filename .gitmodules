@@ -1,6 +1,6 @@
 [submodule "testlib"]
 	path = testlib
-	url = ../testlib.git
+	url = https://github.com/rainboyOJ/testlib.git
 [submodule "Judger"]
 	path = Judger
-	url = ../Judger.git
+	url = https://github.com/rainboyOJ/Judger.git
