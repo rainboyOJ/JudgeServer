@@ -17,7 +17,7 @@
     "js-yaml": "^3.13.1",
     "koa": "^2.8.1",
     "koa-logger": "^3.2.0",
-    "koa-route-ex": "https://github.com/wariii-online-judge/koa-route-ex.git",
+    "koa-route-ex": "https://github.com/rainboyOJ/koa-route-ex",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.0",
     "lodash": "^4.17.11",

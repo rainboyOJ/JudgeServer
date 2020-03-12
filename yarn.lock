@@ -1806,9 +1806,9 @@ koa-logger@^3.2.0:
     humanize-number "0.0.2"
     passthrough-counter "^1.0.0"
 
-"koa-route-ex@https://github.com/wariii-online-judge/koa-route-ex.git":
+"koa-route-ex@https://github.com/rainboyOJ/koa-route-ex":
   version "1.0.3"
-  resolved "https://github.com/wariii-online-judge/koa-route-ex.git#43be342b589ff2a627f972a7e134a7b45f8f227e"
+  resolved "https://github.com/rainboyOJ/koa-route-ex#fa921050019cbb79e3677e986fdf79ff4410eb2e"
   dependencies:
     debug "^4.1.1"
     path-to-regexp "^3.0.0"
@@ -2410,9 +2410,9 @@ path-parse@^1.0.6:
   integrity sha1-1i27VnlAXXLEc37FhgDp3c8G0kw=
 
 path-to-regexp@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-3.0.0.tgz#c981a218f3df543fa28696be2f88e0c58d2e012a"
-  integrity sha1-yYGiGPPfVD+ihpa+L4jgxY0uASo=
+  version "3.2.0"
+  resolved "https://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-3.2.0.tgz#fa7877ecbc495c601907562222453c43cc204a5f"
+  integrity sha1-+nh37LxJXGAZB1YiIkU8Q8wgSl8=
 
 pify@^3.0.0:
   version "3.0.0"
