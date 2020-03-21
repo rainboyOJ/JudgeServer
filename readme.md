@@ -1,6 +1,9 @@
 # JudgeServer
 
 
+Document:  https://rainboyoj.github.io/JudgeServer/
+
+
 ## 使用
 
 ```
@@ -44,3 +47,11 @@ npm run start
  - spj.cpp
  - spj.py
  - spj.js
+
+## 安装
+
+### docker
+
+```
+docker build --network=host -t judgerserver
+```
