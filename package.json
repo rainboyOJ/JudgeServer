@@ -9,6 +9,7 @@
     "debug": "DEBUG=debug nodemon",
     "debug_worker": "DEBUG=debug nodemon --config ./nodemon_worker.json",
     "debug_worker_detail": "DEBUG=debug,detail nodemon --config ./nodemon_worker.json",
+    "build":"tsc --build",
     "doc:dev":"vuepress dev docs",
     "doc:build":"vuepress build docs",
     "doc:push":"./docs/push_docs.sh"

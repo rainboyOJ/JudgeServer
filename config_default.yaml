@@ -12,6 +12,13 @@ TOKEN: token
 COMPILE_QUEUE_DELAY_TIME: 2
 JUDGE_QUEUE_DELAY_TIME: 2
 
+REDIS:
+    subscribe: redis://127.0.0.1/1
+    publish: redis://127.0.0.1/1
+    compile_queue: redis://127.0.0.1/1
+    judge_queue: redis://127.0.0.1/1
+
+
 
 # 语言模板
 LANGUGE_TEMPLATE:

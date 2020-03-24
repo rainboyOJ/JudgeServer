@@ -2,6 +2,7 @@ import { createServer } from './app/Koa'
 import {createSocket} from './app/Socket'
 import Redis from './app/Redis'
 import Response from './app/Response'
+import {RESPONSE} from './types/global'
 
 async function main(){
     try {

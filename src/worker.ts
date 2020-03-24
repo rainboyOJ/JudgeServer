@@ -2,10 +2,13 @@
 import {delay,maps_2_deal} from './utils/index'
 import Redis from './app/Redis'
 import debug from './lib/debug'
-import * as routeIns from 'koa-route-ex'
+import * as RouteIns from 'koa-route-ex'
+import {CTX} from './types/global'
+import compare_data = require('./Function/compile/compare_data');
 debug.info("=== start worker ===")
 
-
+//@ts-ignore
+const routeIns = new RouteIns()
 /** 注册 函数 */
 maps_2_deal(__dirname +'/Function',[/^_/],function(data:any){
     debug.debug(`注册函数: namespace : ${data.rpath},name: ${data.basename} `)
@@ -14,17 +17,20 @@ maps_2_deal(__dirname +'/Function',[/^_/],function(data:any){
 
 // @ts-ignore
 var compile_routes = routeIns.create('/compile',[
-    "compile.uuid",
-    "compile.generate_path_args",           // judge_path data_path src_path 
-    "compile.generate_spj_args",            // spj_ext ,spj_path,spj_src_path
-    "compile.generate_compile_args",
-    "compile.generate_spj_compile_args",    // 生成 ctx.spj_compile_arg
-    "compile.data_validate",
-    "compile.create_data_dir_and_file",
-    "compile.create_src",                   // 生成 源代码
-    "compile.compile_src",                  // 编译源代码
-    "compile.compile_spj_src",              //编译spj源代码
-    "compile.generate_each_point_judge_args"//生成每个测试点的 ctx
+    "compile.compare_config",           // -> ctx.config
+    "compile.compare_data"              // -> ctx.data
+    //"compile.uuid",                         // -> ctx.config.uuid
+    //"compile.generate_path_args",           // -> ctx.config {judge_path data_path src_path}
+    //"compile.generate_spj_args",            // spj_ext ,spj_path,spj_src_path
+    //"compile.generate_compile_args",        // -> ctx.compile_args    编译源的参数
+    //"compile.generate_spj_compile_args",    // 生成 ->ctx.spj_compile_arg 编译spj的参数
+    //"compile.data_validate",                // 得到评测数据列表
+    //"compile.create_data_dir_and_file",
+    //"compile.create_src",                   // 生成 源代码
+    //"compile.compile_src",                  // 编译源代码
+    //"compile.compile_spj_src",              // 编译spj源代码
+    ////"compile.load_data_yaml"              // 载入 data.yaml
+    //"compile.generate_each_point_judge_args"//生成每个测试点的 ctx
 ])
 
 //@ts-ignore
@@ -43,12 +49,14 @@ async function main(){
 
         pop_ctx = await Redis.judge_pop()
         if(!pop_ctx){
-            debug.info('取出 judge_queue 里的数据')
+            debug.info('没用从 judge_queue 里的取出数据')
             pop_ctx = await Redis.compile_pop()
+            if(pop_ctx) debug.info('取出数据成功: [compile_queue ]')
         }
+        else debug.info('取出数据成功: [judge_queue]')
 
         if( !pop_ctx){
-            debug.info(`什么数据也没有取出!`)
+            debug.info('没用从 compile_queue 里的取出数据')
         }
         else {
             socket_client_id = pop_ctx.config.socket_client_id

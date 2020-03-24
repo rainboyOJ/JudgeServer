@@ -2,7 +2,7 @@
 
 import * as socket from 'socket.io'
 import debug from '../lib/debug'
-
+import {RESPONSE} from '../types/global'
 class response {
     nsp:socket.Namespace
     constructor(nsp:socket.Namespace){

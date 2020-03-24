@@ -4,6 +4,7 @@ import * as fs from 'fs'
 import * as pathFn from 'path'
 import * as format from 'string-format'
 import * as core from './core'
+import {any_obj} from '../types/global'
 
 export const maps_2_deal = core.maps_2_deal
 

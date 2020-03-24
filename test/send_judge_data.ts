@@ -18,8 +18,9 @@ var post_data = {
     time: 1000 ,  //ms
     stack: 128, //mb
     spj: "default",
-    auto_io:true,//是否使用 noi 手动读入数据
-    file_io:"a+b"// 如果auto_io 为false 那么这个必须不能为空
+    auto_io:false,//是否使用 noi 手动读入数据
+    file_in:"in",
+    file_out:"out"
 }
 console.log(post_data.code)
 

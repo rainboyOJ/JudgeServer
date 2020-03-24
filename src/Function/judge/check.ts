@@ -4,6 +4,7 @@
 
 import {existsSync} from 'fs'
 import * as Judger from  '../../../Judger/bindings/NodeJS'
+import {CTX} from '../../types/global' 
 
 export = async function spj(ctx:CTX.ctx,next:Function){
     let result = <CTX.result> ctx.result

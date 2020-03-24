@@ -3,6 +3,7 @@
  * */
 import Redis from '../../app/Redis'
 import {removeSync} from 'fs-extra'
+import { CTX,JUDGE_RESULT } from '../../types/global';
 
 function parse_result(_result:string[]):JUDGE_RESULT[]{
     let ret = new Array(_result.length)

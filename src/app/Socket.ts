@@ -5,6 +5,7 @@ import debug from '../lib/debug'
 import config from '../lib/CONFIG'
 import Redis from './Redis'
 import get_lang_ext from '../lib/get_lang_ext'
+import {CTX,CONFIG} from '../types/global'
 
 function check_post_judge_data(data:CTX.post_judge_data):CTX.post_judge_data{
     /** 是否缺少 */
@@ -78,6 +79,13 @@ export const createSocket = (app:Koa) => {
                 config:{
                     type:'compile',
                     socket_client_id:this.id
+                },
+                data:{raw_list:[],list:[],list_for_auto_io:[],
+                    dataYML:{
+                        subtasks:[ { score:100, type:'sum', case:[] } ],
+                        inputFile:'',
+                        outputFile:''
+                    }
                 }
             }).then( function(){
                 debug.debug(`数据加入到 compile_queue`)

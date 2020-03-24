@@ -1,4 +1,7 @@
-interface any_obj {
+import {type} from "os";
+import {outputFile, PathLike} from "fs-extra";
+
+export interface any_obj {
     [k :string]:any
 }
 declare namespace CTX {
@@ -25,10 +28,31 @@ declare namespace CTX {
         src_path?:string
         spj_ext?:string     // spj 的后缀 
         spj_src_path?:string
-        input?:string
-        output?:string
-        user_output?:string
+        input?:string       //-> 根据 file_in 来
+        output?:string      //-> 根据 实际 来
+        user_output?:string //-> 根据 file_out 来
         point_num?:string |number
+    }
+
+    interface DATA {
+        raw_list: any[]
+        /*  [
+         *      [ {input,output,user_output,idx:"0.0"},
+         *        {input,output,user_output,idx:"0.1"}
+         *      ], // subtask1
+         *      [ [input,output,user_output],... ],  // subtask2
+         *      ...
+         *  ]
+         */
+        list:({input:PathLike,output:PathLike,user_output:PathLike,idx:string}[])[] 
+        list_for_auto_io:({input:PathLike,output:PathLike,user_output:PathLike,idx:string}[])[] 
+        dataYML: {
+            subtasks: {score:number,type: 'sum' | 'mul' | 'min',case:(number |string)[]}[]
+            inputFile:string
+            outputFile:string
+            specialJudge?:{ language:string,fileName:string}
+            extraSourceFiles?:{language:string,files:{name:string,dest:string}[]}[]
+        }
     }
 
     interface result {
@@ -76,6 +100,7 @@ declare namespace CTX {
         path: string
         post_judge_data:    post_judge_data
         config:             config
+        data:               DATA
         compile_args?:      judge_args
         judge_args?:         judge_args
         spj_compile_args?:   judge_args | null
@@ -86,14 +111,14 @@ declare namespace CTX {
     }
 }
 
-interface MYREDIS_constructor_params {
+export interface MYREDIS_constructor_params {
     subscribe?: string ,
     publish?: string ,
     compile_queue?: string ,
     judge_queue?: string 
 }
 
-interface CONFIG {
+export interface CONFIG {
     JUDGE_BASE_PATH:string
     DATA_BASE_PATH:string
     TOKEN:string
@@ -119,7 +144,8 @@ interface CONFIG {
     REDIS:MYREDIS_constructor_params
 }
 
-interface JUDGE_RESULT {
+
+export interface JUDGE_RESULT {
     cpu_time: number
     real_time: number
     memory: number
@@ -134,7 +160,7 @@ type OK = 0
 type COMPILE_ERROR = 1
 type SPJ_COMPILE_ERROR = 2
 
-interface RESPONSE {
+export interface RESPONSE {
     socket_client_id:string
     result: INTERNAL_SERVER_ERROR | OK | COMPILE_ERROR | SPJ_COMPILE_ERROR // 0 ok 1 compile_error
     message: string

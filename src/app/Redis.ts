@@ -1,7 +1,7 @@
 import * as Redis from 'ioredis'
 import config from '../lib/CONFIG'
 import debug from '../lib/debug'
-
+import {CTX,RESPONSE,MYREDIS_constructor_params} from '../types/global'
 
 export interface MYREDIS{
     /** 发布 用的Redis实例 */

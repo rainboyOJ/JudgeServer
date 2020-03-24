@@ -12,8 +12,6 @@ const { input_regs,output_regs} = {
         /([\w]*).ans$/i,
         /([\w]*)output\w*.txt$/i
     ],
-
-
 }
 
 

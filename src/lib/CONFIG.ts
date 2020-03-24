@@ -3,6 +3,7 @@
 
 import {load_yaml} from '../utils/index'
 import {join} from 'path'
+import {CONFIG} from '../types/global'
 
 class config {
     CONFIG:CONFIG | undefined
