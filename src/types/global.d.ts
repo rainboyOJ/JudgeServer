@@ -118,6 +118,15 @@ export interface MYREDIS_constructor_params {
     judge_queue?: string 
 }
 
+export interface LANGUGE_TEMPLATE {
+    [key:string]: {
+        compile_args:CTX.judge_args
+        spj_compile_args:CTX.judge_args
+        judge_args:CTX.judge_args
+        spj_judge_args:CTX.judge_args
+    }
+}
+
 export interface CONFIG {
     JUDGE_BASE_PATH:string
     DATA_BASE_PATH:string
@@ -133,14 +142,6 @@ export interface CONFIG {
     }
     DEFAULT_SPJ: string
     JUDGE_EXTRA_MEMORY: number
-    LANGUGE_TEMPLATE: {
-        [key:string]: {
-            compile_args:CTX.judge_args
-            spj_compile_args:CTX.judge_args
-            judge_args:CTX.judge_args
-            spj_judge_args:CTX.judge_args
-        }
-    }
     REDIS:MYREDIS_constructor_params
 }
 

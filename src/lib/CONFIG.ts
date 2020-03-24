@@ -3,7 +3,8 @@
 
 import {load_yaml} from '../utils/index'
 import {join} from 'path'
-import {CONFIG} from '../types/global'
+import {CONFIG,LANGUGE_TEMPLATE} from '../types/global'
+import language_template from './languge_template'
 
 class config {
     CONFIG:CONFIG | undefined
@@ -27,8 +28,7 @@ class config {
     }
 
     get_languge_template(lang:string){
-        if( this.CONFIG)
-            return this.CONFIG.LANGUGE_TEMPLATE[lang]
+        return language_template[lang]
     }
 }
 
