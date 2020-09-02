@@ -2,7 +2,7 @@
  * 准备:操作阶段
  * */
 
-import {promises, PathLike, mkdirSync,linkSync, chownSync} from 'fs'
+import {promises, PathLike, mkdirSync,linkSync,chmodSync ,chownSync} from 'fs'
 import {join,extname,basename,dirname} from 'path'
 import { CTX } from '../../types/global';
 import {async} from 'q';
@@ -16,7 +16,7 @@ import {BASE_MB} from '../../lib/CONFIG'
 import Redis from '../../app/Redis'
 
 const code_uid= 12002
-const code_gid = 12001
+const code_gid = 12002
 
 export = async function compare_operate(ctx:CTX.ctx,next:Function){
     debug.info("============ compare_operate ============")
@@ -38,6 +38,7 @@ export = async function compare_operate(ctx:CTX.ctx,next:Function){
         //TODO: change mode for nobody
         mkdirSync(dirname(<string>input),{recursive:true})
         chownSync(dirname(<string>input), code_gid,code_uid)
+        //chmodSync(dirname(<string>input), 0o777)
         // 创建输入数据的link
         linkSync(raw_input,input)
         idx = <number>idx

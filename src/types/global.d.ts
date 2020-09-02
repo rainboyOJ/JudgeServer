@@ -16,6 +16,7 @@ declare namespace CTX {
         auto_io?:boolean//是否使用 noi 手动读入数据
         file_in?:string  // 如果auto_io 为false 那么这个必须不能为空
         file_out?:string  // 如果auto_io 为false 那么这个必须不能为空
+        remove_judge_data?:boolean  //测试后删除数据
     }
 
     interface config{

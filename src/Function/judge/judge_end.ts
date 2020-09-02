@@ -27,6 +27,7 @@ export = async function judge_end(ctx:CTX.ctx,next:Function){
         result:<CTX.result>ctx.result
     })
 
+    debug.info(ctx.judge_args)
     debug.info(ctx.result)
     if( left_judge_cnt === 0){
 
@@ -38,7 +39,8 @@ export = async function judge_end(ctx:CTX.ctx,next:Function){
         await Redis.del_judge_point(<string>ctx.config.uuid)
         await Redis.del_all_judge_result(<string>ctx.config.uuid)
         /** 删除 评测 文件夹 */
-        removeSync(<string>ctx.config.judge_path)
+        if(ctx.post_judge_data.remove_judge_data)
+            removeSync(<string>ctx.config.judge_path)
 
         /** 发送评测结果 */
         await Redis.PUBLISH_MESSAGE({
