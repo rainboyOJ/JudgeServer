@@ -27,6 +27,7 @@ declare namespace CTX {
         data_path?:string
         src_path?:string
         spj_ext?:string     // spj 的后缀 
+        spj_path?:string    // spj 的路径
         spj_src_path?:string
         input?:string       //-> 根据 file_in 来
         output?:string      //-> 根据 实际 来
@@ -35,7 +36,25 @@ declare namespace CTX {
     }
 
     interface DATA {
-        raw_list: any[]
+        raw_list: any[] //数据目录下的所有文件
+
+        //分类好的测试数据
+        //一维数组,idx 第几个测试点,编号从0开始
+        list:{
+            raw_input:PathLike,     //原始的输入数据路径
+            raw_output:PathLike,    //原始的输出数据路径
+            input:PathLike,         //输入数据路径
+            user_output:PathLike,   //用户输出的路径
+            idx:string|number
+        }[]  
+        //list_for_auto_io:({input:PathLike,output:PathLike,user_output:PathLike,idx:string}[])[] 
+        //dataYML: {
+            //subtasks: {score:number,type: 'sum' | 'mul' | 'min',case:(number |string)[]}[]
+            //inputFile:string
+            //outputFile:string
+            //specialJudge?:{ language:string,fileName:string}
+            //extraSourceFiles?:{language:string,files:{name:string,dest:string}[]}[]
+        //}
         /*  [
          *      [ {input,output,user_output,idx:"0.0"},
          *        {input,output,user_output,idx:"0.1"}
@@ -44,15 +63,6 @@ declare namespace CTX {
          *      ...
          *  ]
          */
-        list:({input:PathLike,output:PathLike,user_output:PathLike,idx:string}[])[] 
-        list_for_auto_io:({input:PathLike,output:PathLike,user_output:PathLike,idx:string}[])[] 
-        dataYML: {
-            subtasks: {score:number,type: 'sum' | 'mul' | 'min',case:(number |string)[]}[]
-            inputFile:string
-            outputFile:string
-            specialJudge?:{ language:string,fileName:string}
-            extraSourceFiles?:{language:string,files:{name:string,dest:string}[]}[]
-        }
     }
 
     interface result {
@@ -81,6 +91,7 @@ declare namespace CTX {
         exe_path?:string
         input_path?:string
         output_path?:string
+        seccomp_rule_name?:string
         error_path?:string
         log_path?:string
         args?:string[]

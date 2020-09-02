@@ -9,7 +9,8 @@ const lang_ext_map = new Map([
     ['javascript','js'],
     ['js','js'],
     ["nodejs",'js'],
-    ["javascript",'js']
+    ["javascript",'js'],
+    ["testlib","testlib"]
 ])
 export default function  get_lang_ext(lang:string):string{
     if( lang_ext_map.has(lang.toLowerCase())){

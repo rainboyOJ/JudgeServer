@@ -1,0 +1,36 @@
+digraph title {
+    node[shape=rect fixedsize=true style=filled fillcolor=white colorscheme=accent8 ];
+    edge[arrowhead=vee arrowsize=.5 weight=.1]
+    a[label="生产者"];
+    b1[label="消费者1"];
+    b2[label="消费者2"];
+    b3[label="消费者3"];
+    b4[label="消费者4"];
+    b5[label="消费者5"];
+    queue[
+    style=none
+    shape=plaintext
+    label=< <TABLE CELLBORDER="1" BORDER="0" CELLSPACING="0" CELLPADDING="2">
+        <tr>
+            <td PORT="head">头</td>
+            <td PORT="">...</td>
+            <td PORT="">data4</td>
+            <td PORT="">data3</td>
+            <td PORT="">data2</td>
+            <td PORT="">data1</td>
+            <td PORT="tail">尾</td>
+        </tr>
+    </TABLE> >
+    ];
+    a->queue:head;
+    queue:tail->b1;
+    queue:tail->b2;
+    queue:tail->b3;
+    queue:tail->b4;
+    queue:tail->b5;
+    b1->queue:tail[constraint=false];
+    b2->queue:tail[constraint=false];
+    b3->queue:tail[constraint=false];
+    b4->queue:tail[constraint=false];
+    b5->queue:tail[constraint=false];
+}

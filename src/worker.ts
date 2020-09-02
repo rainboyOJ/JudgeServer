@@ -10,27 +10,18 @@ debug.info("=== start worker ===")
 //@ts-ignore
 const routeIns = new RouteIns()
 /** 注册 函数 */
-maps_2_deal(__dirname +'/Function',[/^_/],function(data:any){
+maps_2_deal(__dirname +'/Function',[/^_/,/.swp$/],function(data:any){
     debug.debug(`注册函数: namespace : ${data.rpath},name: ${data.basename} `)
     routeIns.register(require(data.full_path), data.rpath)
 })
 
 // @ts-ignore
 var compile_routes = routeIns.create('/compile',[
-    "compile.compare_config",           // -> ctx.config
-    "compile.compare_data"              // -> ctx.data
-    //"compile.uuid",                         // -> ctx.config.uuid
-    //"compile.generate_path_args",           // -> ctx.config {judge_path data_path src_path}
-    //"compile.generate_spj_args",            // spj_ext ,spj_path,spj_src_path
-    //"compile.generate_compile_args",        // -> ctx.compile_args    编译源的参数
-    //"compile.generate_spj_compile_args",    // 生成 ->ctx.spj_compile_arg 编译spj的参数
-    //"compile.data_validate",                // 得到评测数据列表
-    //"compile.create_data_dir_and_file",
-    //"compile.create_src",                   // 生成 源代码
-    //"compile.compile_src",                  // 编译源代码
-    //"compile.compile_spj_src",              // 编译spj源代码
-    ////"compile.load_data_yaml"              // 载入 data.yaml
-    //"compile.generate_each_point_judge_args"//生成每个测试点的 ctx
+    "compile.compare_config",           // -> 准备 ctx.config 数据
+    "compile.compare_data",             // -> 准备 ctx.data 
+    "compile.compile_src",              // -> 编译 源代码
+    "compile.compile_spj",              // -> 编译 spj
+    "compile.compare_operate",          // -> 生成测试数据ctx,放入队列,准备好每个测试数据
 ])
 
 //@ts-ignore
@@ -65,7 +56,7 @@ async function main(){
                 await compile_routes.routes()(pop_ctx,async (ctx:CTX.ctx | undefined )=>{
                     if(ctx){
                         console.log("============ compile_routes exec END ==================================")
-                        console.log(ctx)
+                        console.log(JSON.stringify(ctx,null,4))
                         console.log("==================================================================") }
                 })
                 //@ts-ignore

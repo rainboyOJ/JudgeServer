@@ -80,12 +80,13 @@ export const createSocket = (app:Koa) => {
                     type:'compile',
                     socket_client_id:this.id
                 },
-                data:{raw_list:[],list:[],list_for_auto_io:[],
-                    dataYML:{
-                        subtasks:[ { score:100, type:'sum', case:[] } ],
-                        inputFile:'',
-                        outputFile:''
-                    }
+                data:{raw_list:[],list:[],
+                    //list_for_auto_io:[],
+                    //dataYML:{
+                        //subtasks:[ { score:100, type:'sum', case:[] } ],
+                        //inputFile:'',
+                        //outputFile:''
+                    //}
                 }
             }).then( function(){
                 debug.debug(`数据加入到 compile_queue`)

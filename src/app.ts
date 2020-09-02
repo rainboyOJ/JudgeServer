@@ -21,7 +21,7 @@ async function main(){
 
         /**  Redis 订阅*/
         var response = new Response(nsp)
-        Redis.SUBSCRIBE_INIT((data:RESPONSE)=>{
+        Redis.SUBSCRIBE_INIT((data:RESPONSE)=>{ //订阅 消息处理
             response.deal(data)
         })
 

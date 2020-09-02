@@ -1,0 +1,28 @@
+digraph g {
+    node[shape=rect  style=filled fillcolor=white colorscheme=accent8 ];
+    compound=true;
+    splines=ortho;
+    a[label="开始" shape=oval]
+    b[label="判断类型" shape=Mdiamond]
+    a->a1->b[label=""];
+    a1[label="从消息队列中取出数据"]
+    {
+        rank=same;
+    }
+    subgraph cluster_1{
+        label="compile";
+        x1->x2;
+        x1[label="产生UUID"]
+        x2->xend;
+        xend[label="产生类型judge的数据\n加入消息队列"]
+    } 
+    subgraph cluster_2{
+        label="judge";
+        y1->y2;
+        
+    } 
+    b->x1[lhead=cluster_1 xlabel="类型:compile"];
+    b->y1[lhead=cluster_2 xlabel="类型:judge"];
+    x1->y1[constraint=false minlen=15 style=invis];
+
+}

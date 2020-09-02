@@ -1,0 +1,61 @@
+digraph compile_stage {
+    node[shape=rect style=filled fillcolor=white colorscheme=accent8 width=2.5];
+    //txt_n1;
+    txt1,txt2,txt3[shape=plaintext style=none];
+    txt1[label="准备阶段"];
+    txt2[label="编译阶段"];
+    txt3[label="结束阶段"];
+    //txt1-> txt2-> txt3;
+    {
+        rank=same;
+        a[shape=record label="ctx.config|{
+            uuid|
+                judge_path|
+                data_path|
+                src_path
+        }"];
+        ax[shape=point fillcolor=black width=.1];
+    }
+
+    {
+        b[shape=record label="ctx.data|{
+            raw_list|
+                list|
+                list_for_auto_io|
+                dataYML
+        }"];
+    }
+    {
+        rank=same;
+        b1[shape=record label="操作|{创建文件夹|
+            创建软链接|
+            其它操作}"];
+        bx[shape=point fillcolor=black width=.1];
+    }
+
+
+    {
+        rank=same;
+        cx[shape=point fillcolor=black width=.1];
+        c[shape=record label="编译源码|{1.生成编译参数|2.创建源代码|3.编译}"];
+    }
+    {
+        rank=same;
+        dx[shape=point fillcolor=black width=.1];
+        d[label="编译spj"];
+        dx->d[minlen=8 style=invis];
+    }
+
+    {
+        rank=same;
+        e[label="结束,产生judge ctx 参数"]
+        txt3;
+    }
+
+    ax->txt1->bx[arrowhead=none];
+    bx->cx[arrowhead=none style=invis];
+    cx->txt2->dx[arrowhead=none];
+    dx->txt3[style=invis];
+    a->b->b1->c->d->e;
+    list[shape=record label="list = [input,output,userOutput]"]
+}

@@ -91,3 +91,5 @@ config.yaml
 dist/
 log/
 .ccls-cache
+dump.rdb
+*.swp

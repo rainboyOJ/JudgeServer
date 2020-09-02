@@ -12,13 +12,13 @@ var code = readFileSync(__dirname+'/a+b.cpp',{encoding:"utf-8"})
 //console.log(code)
 var post_data = {
     code,
-    id: "a+b",
+    id: "a+b_spj_cpp",
     lang: "cpp",
     memory: 128, //mb
     time: 1000 ,  //ms
     stack: 128, //mb
-    spj: "default",
-    auto_io:true,//是否使用 noi 手动读入数据
+    spj: "INNER",
+    auto_io:false,//是否使用 noi 手动读入数据
     file_in:"in",
     file_out:"out"
 }

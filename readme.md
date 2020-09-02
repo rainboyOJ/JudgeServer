@@ -36,7 +36,7 @@ cp config_default.yaml config.yaml
 # change config.yaml
 npm run start
 ```
-
+## 本评测机不支持子任务与交互
 
 ## spj
 
@@ -53,5 +53,11 @@ npm run start
 ### docker
 
 ```
-docker build --network=host -t judgerserver
+docker build --network=host -t judgeserver
+```
+
+测试
+
+```
+docker run -it -v <path_to_localjudge>:/judgeserver judgeserver /bin/bash
 ```
