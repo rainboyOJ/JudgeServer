@@ -30,7 +30,7 @@ const {readdir} = promises
  * */
 
 export = async function compare_config(ctx:CTX.ctx,next:Function){
-    debug.debug("this=========================")
+    //debug.debug("this=========================")
     //-> ctx.config.uuid
     ctx.config.uuid = generate()
 
@@ -61,6 +61,7 @@ export = async function compare_config(ctx:CTX.ctx,next:Function){
     if(ctx.post_judge_data.spj === 'INNER' || spjs.includes(<string>ctx.post_judge_data.spj)){ //数据目录内部的spj spj.cpp,spj.py,spj.js
         let file_in_data_path = readdirSync(<PathLike>ctx.config.data_path)
         let spj
+
         if (ctx.post_judge_data.spj === 'INNER') {
             for( let name of spjs){
                 if(file_in_data_path.includes(name)){
@@ -70,6 +71,8 @@ export = async function compare_config(ctx:CTX.ctx,next:Function){
             }
         }
         else spj = ctx.post_judge_data.spj
+
+
         if( !spj) throw(`没有在数据目录内找到spj代码,请确保含有${spjs.join(" ")}之一`)
         if( !file_in_data_path.includes(spj)) throw(`没有在数据目录内找到spj代码,请确保含有${spj}`)
 

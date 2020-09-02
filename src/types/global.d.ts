@@ -132,10 +132,10 @@ export interface MYREDIS_constructor_params {
 
 export interface LANGUGE_TEMPLATE {
     [key:string]: {
-        compile_args:CTX.judge_args
-        spj_compile_args:CTX.judge_args
-        judge_args:CTX.judge_args
-        spj_judge_args:CTX.judge_args
+        compile_args?:CTX.judge_args
+        spj_compile_args?:CTX.judge_args
+        judge_args?:CTX.judge_args
+        spj_judge_args?:CTX.judge_args
     }
 }
 

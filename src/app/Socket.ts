@@ -13,8 +13,8 @@ function check_post_judge_data(data:CTX.post_judge_data):CTX.post_judge_data{
 
     let args = {...default_args,...data}
     
-    if( !args.code || args.code.length < 50){
-        throw('没有提交代码,或代码长度不够(>50)')
+    if( !args.code || args.code.length < 10){
+        throw('没有提交代码,或代码长度不够(>=10)')
     }
 
     if( !args.auto_io  && (!args.file_in || !args.file_out )){

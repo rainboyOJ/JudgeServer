@@ -20,8 +20,8 @@ export = async function compile_spj(ctx:CTX.ctx,next:Function){
         //产生compile 的参数
         let lang = get_language_ext(<string>ctx.config.spj_ext)
         if( language_template.hasOwnProperty(lang)){
-            let spj_compile_args= {...language_template[lang].spj_compile_args}
-            if( spj_compile_args ){ // 如果 compile_args == null 就表示不用编译
+            if( language_template[lang].spj_compile_args ){ // 如果 compile_args == null 就表示不用编译
+                let spj_compile_args= {...language_template[lang].spj_compile_args}
 
                 //@ts-ignore
                 ctx.spj_compile_args = deep_format(spj_compile_args, ctx.config)

@@ -71,10 +71,12 @@ export = async function compare_operate(ctx:CTX.ctx,next:Function){
 
         //========================== spj_judge_args
         let spj_lang = get_language_ext(<string>ctx.config.spj_ext)
-        let spj_judge_args = {...language_template[lang].spj_judge_args}
+        let spj_judge_args = {...language_template[spj_lang].spj_judge_args}
 
         //@ts-ignore
         judge_ctx[idx].spj_judge_args = deep_format(spj_judge_args,{...judge_ctx[idx].config,raw_input,input,user_output,raw_output})
+        debug.info("===========spj_judge_args===========")
+        debug.info(deep_format(spj_judge_args,{...judge_ctx[idx].config,raw_input,input,user_output,raw_output}))
 
     })
     debug.info(JSON.stringify(judge_ctx,null,4))
