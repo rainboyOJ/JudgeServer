@@ -57,18 +57,22 @@ export = async function compare_config(ctx:CTX.ctx,next:Function){
     ctx.config.input = ctx.post_judge_data.file_in
 
     //spj 相关参数的生成
-    if(ctx.post_judge_data.spj === 'INNER'){ //数据目录内部的spj spj.cpp,spj.py,spj.js
+    const spjs = ["spj.cpp","spj.py","spj.js"]
+    if(ctx.post_judge_data.spj === 'INNER' || spjs.includes(<string>ctx.post_judge_data.spj)){ //数据目录内部的spj spj.cpp,spj.py,spj.js
         let file_in_data_path = readdirSync(<PathLike>ctx.config.data_path)
-        let spjs = ["spj.cpp","spj.py","spj.js"]
         let spj
-        for( let name of spjs){
-            if(file_in_data_path.includes(name)){
-                spj = name
-                break
+        if (ctx.post_judge_data.spj === 'INNER') {
+            for( let name of spjs){
+                if(file_in_data_path.includes(name)){
+                    spj = name
+                    break
+                }
             }
         }
-        if( !spj)
-            throw(`没有在数据目录内找到spj代码,请确保含有${spjs.join(" ")}之一`)
+        else spj = ctx.post_judge_data.spj
+        if( !spj) throw(`没有在数据目录内找到spj代码,请确保含有${spjs.join(" ")}之一`)
+        if( !file_in_data_path.includes(spj)) throw(`没有在数据目录内找到spj代码,请确保含有${spj}`)
+
         ctx.config.spj_ext = extname(spj).replace('.', "")
         ctx.config.spj_src_path = join(<string>ctx.config.data_path,spj)
         ctx.config.spj_path =join(<string>ctx.config.judge_path,'spj') 

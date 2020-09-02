@@ -48,6 +48,8 @@ npm run start
  - spj.py
  - spj.js
 
+三种格式的测试文件,spj如果指定为`INNER`,侧按顺序去查找,也可以直接指定spj=spj.py
+
 ## 安装
 
 ### docker
@@ -61,3 +63,5 @@ docker build --network=host -t judgeserver
 ```
 docker run -it -v <path_to_localjudge>:/judgeserver judgeserver /bin/bash
 ```
+
+
