@@ -39,4 +39,4 @@ export default new config([
 ])
 export const TESTLIB_PATH = "/judge/checker"
 export const DEFAULT_CHECKER= "fcmp2"
-export const BASE_MB = 16
+export const BASE_MB = 16   //默认加上多少MB

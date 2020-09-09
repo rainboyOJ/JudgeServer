@@ -34,13 +34,14 @@ export = async function compare_operate(ctx:CTX.ctx,next:Function){
     //1. 创建文件夹
     //TODO: change mode for compile
     //await mkdir(<string>ctx.config.judge_path,{recursive:true})
-    ctx.data.list.map( ({raw_input,raw_output,input,user_output,idx})=>{
+    await Promise.all( ctx.data.list.map( ({raw_input,raw_output,input,user_output,idx})=>{
         //TODO: change mode for nobody
         mkdirSync(dirname(<string>input),{recursive:true})
         chownSync(dirname(<string>input), code_gid,code_uid)
         //chmodSync(dirname(<string>input), 0o777)
         // 创建输入数据的link
-        linkSync(raw_input,input)
+        //linkSync(raw_input,input)  [废弃]
+
         idx = <number>idx
 
         //========================== judge_args
@@ -52,6 +53,7 @@ export = async function compare_operate(ctx:CTX.ctx,next:Function){
         if( ctx.post_judge_data.memory )
             //@ts-ignore
             judge_ctx[idx].judge_args.max_memory =  ctx.post_judge_data.memory * 1024*1024 + (BASE_MB)*1024*1024
+            //加上基础MB
         if( ctx.post_judge_data.time ){
             //@ts-ignore
             judge_ctx[idx].judge_args.max_cpu_time =  ctx.post_judge_data.time
@@ -78,7 +80,11 @@ export = async function compare_operate(ctx:CTX.ctx,next:Function){
         debug.info("===========spj_judge_args===========")
         debug.info(deep_format(spj_judge_args,{...judge_ctx[idx].config,raw_input,input,user_output,raw_output}))
 
+
+        //复制数据
+        return promises.copyFile(raw_input, input)
     })
+    ) // Promise.all END
     debug.info(JSON.stringify(judge_ctx,null,4))
 
     //设置评测点的数量

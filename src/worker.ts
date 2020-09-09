@@ -54,10 +54,11 @@ async function main(){
             try {
                 //@ts-ignore
                 await compile_routes.routes()(pop_ctx,async (ctx:CTX.ctx | undefined )=>{
-                    if(ctx){
-                        console.log("============ compile_routes exec END ==================================")
-                        console.log(JSON.stringify(ctx,null,4))
-                        console.log("==================================================================") }
+                    //if(ctx){
+                        //console.log("============ compile_routes exec END ==================================")
+                        //console.log(JSON.stringify(ctx,null,4))
+                        //console.log("==================================================================") 
+                    //}
                 })
                 //@ts-ignore
                 await judge_routes.routes()(pop_ctx,async (ctx:CTX.ctx | undefined)=>{
@@ -72,6 +73,7 @@ async function main(){
             catch(e){
                 Redis.PUBLISH_MESSAGE({
                     socket_client_id:socket_client_id,
+                    uid: (<CTX.ctx>pop_ctx).post_judge_data.uid,
                     result: e.result || -1,
                     message:e.message || e,
                     result_list:[]
@@ -82,4 +84,8 @@ async function main(){
     }
 }
 
-main()
+export default main
+
+//如果直接调用本文件,就执行一个worker
+if( process.mainModule!.filename === __filename)
+    main();

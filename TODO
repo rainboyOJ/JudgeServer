@@ -1,1 +1,16 @@
+- [ ] debug的调整
+- [ ] Dockerfile 加上yarn build
+- [ ] throw 知道在哪个文件,哪一行throw的, 在 message 里
+- [ ] judgelib.so运行错误,要返回错误的原因
+- [x] post_judge_data加上uid
+- [x] 结果的内存限制判断
+- [x] spj 运行时错误
 - [ ] 需要到app.ts socket 接收的数据进行合法检测
+写好judgserver测试数据的返回值的格式
+
+{
+result:-1 |0 | string
+message:
+result_list
+}
+
