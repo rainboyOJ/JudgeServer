@@ -72,6 +72,7 @@ async function main(){
             catch(e){
                 Redis.PUBLISH_MESSAGE({
                     socket_client_id:socket_client_id,
+                    uid: (<CTX.ctx>pop_ctx).post_judge_data.uid,
                     result: e.result || -1,
                     message:e.message || e,
                     result_list:[]

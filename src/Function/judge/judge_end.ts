@@ -45,6 +45,7 @@ export = async function judge_end(ctx:CTX.ctx,next:Function){
         /** 发送评测结果 */
         await Redis.PUBLISH_MESSAGE({
             socket_client_id:ctx.config.socket_client_id,
+            uid:ctx.post_judge_data.uid,
             result: 0,
             message: 'OK',
             result_list: parse_result(_result)

@@ -48,7 +48,7 @@ export const createSocket = (app:Koa) => {
     io.on('connection', function(socket){
         debug.debug(`${socket.id} connected!`)
         
-        /**  */
+        /** 处理发送judge数据 */
         socket.on('judge',function(this:socket.Socket,data:CTX.post_judge_data){
             debug.detail(this.id)
             debug.detail(data)
@@ -66,6 +66,7 @@ export const createSocket = (app:Koa) => {
                 Redis.PUBLISH_MESSAGE({
                     socket_client_id:<string>this.id,
                     result:-1,
+                    uid: data.uid, // 评测的唯一标识
                     message:e.message || e,
                     result_list:[]
                 });

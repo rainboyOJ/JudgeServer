@@ -9,7 +9,7 @@ class response {
         this.nsp = nsp
     }
 
-    deal(res:RESPONSE){
+    deal(res:RESPONSE){ //发送数据给 客户端
         let {socket_client_id} = res
         this.send(socket_client_id,res)
     }

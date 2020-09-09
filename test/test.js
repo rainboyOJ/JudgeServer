@@ -32,7 +32,6 @@ var test_list = [
         code_path:"a+b.cpp",
         judge_args:{
             code:"",
-            uid:"a+b cpp auto_io_true",
             id: "a+b",
             lang: "cpp",
             memory: 128, //mb
@@ -49,72 +48,69 @@ var test_list = [
           assert.equal(sum, 0)
         }
     },
-    {
-        name:"a+b cpp auto_io_false",
-        code_path:"a+b_freopen.cpp",
-        judge_args:{
-            code:"",
-            uid:"a+b cpp auto_io_false",
-            id: "a+b",
-            lang: "cpp",
-            memory: 128, //mb
-            time: 1000 ,  //ms
-            stack: 128, //mb
-            spj: "default",
-            auto_io:false,//是否使用 noi 手动读入数据
-            file_in:"in",
-            file_out:"out"
-        },
-        assert:function({result_list}){
-          let sum = 0
-          for(let {result} of result_list) sum+=result
-          assert.equal(sum, 0)
-        }
-    },
-    {
-        name:"a+b cpp auto_io_false 指定spj.py",
-        code_path:"a+b_freopen.cpp",
-        judge_args:{
-            uid:"a+b cpp auto_io_false 指定spj.py",
-            code:"",
-            id: "a+b",
-            lang: "cpp",
-            memory: 128, //mb
-            time: 1000 ,  //ms
-            stack: 128, //mb
-            spj: "spj.py",
-            auto_io:false,//是否使用 noi 手动读入数据
-            file_in:"in",
-            file_out:"out"
-        },
-        assert:function({result_list}){
-          let sum = 0
-          for(let {result} of result_list) sum+=result
-          assert.equal(sum, 0)
-        }
-    },
-    {
-        name:"a+b py3 auto_io_true 指定spj.py",
-        code_path:"a+b.py",
-        judge_args:{
-            code:"",
-          uid:"a+b py3 auto_io_true 指定spj.py",
-            id: "a+b",
-            lang: "py",
-            memory: 128, //mb
-            time: 1000 ,  //ms
-            stack: 128, //mb
-            spj: "default",
-            auto_io:true,//是否使用 noi 手动读入数据
-            file_in:"in",
-            file_out:"out"
-        },
-        assert:function({result_list}){
-          let sum = 0
-          for(let {result} of result_list) sum+=result
-          assert.equal(sum, 0)
-        }
-    }
+    //{
+        //name:"a+b cpp auto_io_false",
+        //code_path:"a+b_freopen.cpp",
+        //judge_args:{
+            //code:"",
+            //id: "a+b",
+            //lang: "cpp",
+            //memory: 128, //mb
+            //time: 1000 ,  //ms
+            //stack: 128, //mb
+            //spj: "default",
+            //auto_io:false,//是否使用 noi 手动读入数据
+            //file_in:"in",
+            //file_out:"out"
+        //},
+        //assert:function({result_list}){
+          //let sum = 0
+          //for(let {result} of result_list) sum+=result
+          //assert.equal(sum, 0)
+        //}
+    //},
+    //{
+        //name:"a+b cpp auto_io_false 指定spj.py",
+        //code_path:"a+b_freopen.cpp",
+        //judge_args:{
+            //code:"",
+            //id: "a+b",
+            //lang: "cpp",
+            //memory: 128, //mb
+            //time: 1000 ,  //ms
+            //stack: 128, //mb
+            //spj: "spj.py",
+            //auto_io:false,//是否使用 noi 手动读入数据
+            //file_in:"in",
+            //file_out:"out"
+        //},
+        //assert:function({result_list}){
+          //let sum = 0
+          //for(let {result} of result_list) sum+=result
+          //assert.equal(sum, 0)
+        //}
+    //},
+    //{
+        //name:"a+b py3 auto_io_true 指定spj.py",
+        //code_path:"a+b.py",
+        //judge_args:{
+            //code:"",
+            //id: "a+b",
+            //lang: "py",
+            //memory: 128, //mb
+            //time: 1000 ,  //ms
+            //stack: 128, //mb
+            //spj: "default",
+            //auto_io:true,//是否使用 noi 手动读入数据
+            //file_in:"in",
+            //file_out:"out"
+        //},
+        //assert:function({result_list}){
+          //let sum = 0
+          //for(let {result} of result_list) sum+=result
+          //assert.equal(sum, 0)
+        //}
+    //}
 ]
 
 function print_result(judge_result){
@@ -144,8 +140,8 @@ async function do_test(){
           console.log(judge_result)
           throw(judge_result)
         }
-        console.log(judge_result.uid)
-        print_result(judge_result.result_list)
+        //else
+          //print_result(judge_result.result_list)
         test_case.assert(judge_result)
         console.log("测试通过")
     }

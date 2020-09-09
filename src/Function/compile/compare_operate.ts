@@ -52,6 +52,7 @@ export = async function compare_operate(ctx:CTX.ctx,next:Function){
         if( ctx.post_judge_data.memory )
             //@ts-ignore
             judge_ctx[idx].judge_args.max_memory =  ctx.post_judge_data.memory * 1024*1024 + (BASE_MB)*1024*1024
+            //加上基础MB
         if( ctx.post_judge_data.time ){
             //@ts-ignore
             judge_ctx[idx].judge_args.max_cpu_time =  ctx.post_judge_data.time

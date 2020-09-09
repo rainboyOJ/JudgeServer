@@ -6,7 +6,8 @@ export interface any_obj {
 }
 declare namespace CTX {
     interface post_judge_data { // 发送过来的评测数据的模式
-        id: number | string
+        uid: string //评测的唯一标识,需要在返回的数据上加入
+        id: number | string  //评测的数据目录名
         lang: string
         code: string
         memory?: number      //mb
@@ -177,6 +178,7 @@ export interface RESPONSE {
     socket_client_id:string
     result: INTERNAL_SERVER_ERROR | OK | COMPILE_ERROR | SPJ_COMPILE_ERROR // 0 ok 1 compile_error
     message: string
+    uid:string,
     result_list?:JUDGE_RESULT[]
 }
 
