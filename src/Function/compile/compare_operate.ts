@@ -5,7 +5,6 @@
 import {promises, PathLike, mkdirSync,linkSync,chmodSync ,chownSync} from 'fs'
 import {join,extname,basename,dirname} from 'path'
 import { CTX } from '../../types/global';
-import {async} from 'q';
 const {readdir,mkdir} = promises
 import {deep_format} from '../../utils'
 import get_language_ext from '../../lib/get_lang_ext'
