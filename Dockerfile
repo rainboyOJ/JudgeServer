@@ -19,7 +19,10 @@ RUN npm config set registry http://registry.npm.taobao.org/ && \
 #RUN git clone --depth=1 https://github.com/rainboyOJ/JudgeServer /JudgeServer && cd /JudgeServer && git submodule init && git submodule update
 ADD . /JudgeServer
 WORKDIR /JudgeServer
-RUN git submodule init && git submodule update && mkdir -p /data && cp -r /JudgeServer/demo/data/a+b /data/
+RUN git submodule init && git submodule update && \
+    mkdir -p /data && cp -r /JudgeServer/demo/data/a+b /data/ && \
+    chown root:root /JudgeServer/config/images.pas && \
+    chmod 600 /JudgeServer/config/images.pas
 # 安装相应的judger 与testlib
 RUN npm install yarn -g && yarn config set registry https://registry.npm.taobao.org && \
     yarn && yarn build && \
