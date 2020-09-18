@@ -18,3 +18,12 @@ REDIS:
     compile_queue: redis://127.0.0.1/1
     judge_queue: redis://127.0.0.1/1
 
+DEFAULT_POST_JUDGE_ARGS:
+    memory: 128
+    time: 1000
+    stack: 128
+    spj: 'default'
+    auto_io: true
+    remove_judge_data: true
+
+

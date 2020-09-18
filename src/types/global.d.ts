@@ -153,6 +153,9 @@ export interface CONFIG {
         stack: number
         spj: string
         auto_io: boolean
+        file_in?:string  // 如果auto_io 为false 那么这个必须不能为空
+        file_out?:string  // 如果auto_io 为false 那么这个必须不能为空
+        remove_judge_data?:boolean  //测试后删除数据
     }
     DEFAULT_SPJ: string
     JUDGE_EXTRA_MEMORY: number
