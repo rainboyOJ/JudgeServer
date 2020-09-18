@@ -75,6 +75,7 @@ declare namespace CTX {
         exit_code: number
         error: number
         result: number
+        detail?:string  //评测出错的细节
     }
 
     interface save_result {

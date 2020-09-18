@@ -5,6 +5,9 @@ import debug from './lib/debug'
 import * as RouteIns from 'koa-route-ex'
 import {CTX} from './types/global'
 import compare_data = require('./Function/compile/compare_data');
+import judge_end from "./lib/judge_end"
+import {JUDGE_ERROR_MAP_NUM,JUDGE_ERROR} from "./lib/DEFINE"
+import judge = require('./Function/judge/judge');
 debug.info("=== start worker ===")
 
 //@ts-ignore
@@ -28,8 +31,9 @@ var compile_routes = routeIns.create('/compile',[
 var judge_routes = routeIns.create('/judge', [
     "judge.judge",
     "judge.spj",
-    "judge.judge_end"
+    //"judge.judge_end"
 ])
+
 
 
 async function main(){
@@ -60,15 +64,6 @@ async function main(){
                         //console.log("==================================================================") 
                     //}
                 })
-                //@ts-ignore
-                await judge_routes.routes()(pop_ctx,async (ctx:CTX.ctx | undefined)=>{
-                    /** 评测结束,进行相关处理 */
-                    if( ctx) {
-                        debug.detail(ctx)
-                        // if ctx.judge_end === true
-                        // REDIS.PUBLISH_MESSAGE
-                    }
-                })
             }
             catch(e){
                 Redis.PUBLISH_MESSAGE({
@@ -78,6 +73,33 @@ async function main(){
                     message:e.message || e,
                     result_list:[]
                 });
+            }
+
+            try {
+                //@ts-ignore
+                await judge_routes.routes()(pop_ctx,async (ctx:CTX.ctx | undefined)=>{
+                    /** 评测结束,进行相关处理 */
+                    if( ctx) {
+                        debug.info("=============== judge point end ==============")
+                        debug.debug(ctx)
+                        await judge_end(ctx)
+                    }
+                })
+            }
+            catch(e){
+                debug.info("error=================")
+                debug.info(e)
+                debug.info(e.stack)
+                if(e.ctx)
+                    await judge_end( <CTX.ctx>e.ctx )
+                else{
+                    pop_ctx.result = {
+                        real_time:0,cpu_time:0,signal:0,error:0,memory:0,exit_code:0,
+                        result: JUDGE_ERROR_MAP_NUM.UNKOWN_ERROR,
+                        detail:`${e.toString()}\n ${e.stack.toString()}`
+                    }
+                    await judge_end(pop_ctx)
+                }
             }
         }
         await delay(100);
