@@ -74,7 +74,7 @@ declare namespace CTX {
         signal: number
         exit_code: number
         error: number
-        result: number
+        result: number | string
         detail?:string  //评测出错的细节
     }
 
