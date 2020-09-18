@@ -177,7 +177,8 @@ type SPJ_COMPILE_ERROR = 2
 
 export interface RESPONSE {
     socket_client_id:string
-    result: INTERNAL_SERVER_ERROR | OK | COMPILE_ERROR | SPJ_COMPILE_ERROR // 0 ok 1 compile_error
+    //result: INTERNAL_SERVER_ERROR | OK | COMPILE_ERROR | SPJ_COMPILE_ERROR // 0 ok 1 compile_erro
+    result: number | string
     message: string
     uid:string,
     result_list?:JUDGE_RESULT[]

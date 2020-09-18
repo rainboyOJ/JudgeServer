@@ -7,7 +7,7 @@ import {RESPONSE} from './types/global'
 async function main(){
     try {
         var koa = createServer()
-        let {server,nsp} =createSocket(koa);
+        let {server,nsp} =createSocket(koa); //在这里把提交的 post_judge_data 放入队列
 
         koa.use(async function(ctx,next){
             if( ctx.method == 'GET' && ctx.path === '/'){

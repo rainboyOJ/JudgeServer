@@ -6,6 +6,7 @@ import config from '../lib/CONFIG'
 import Redis from './Redis'
 import get_lang_ext from '../lib/get_lang_ext'
 import {CTX,CONFIG} from '../types/global'
+import {JUDGE_ERROR_MAP_NUM} from "../lib/DEFINE"
 
 function check_post_judge_data(data:CTX.post_judge_data):CTX.post_judge_data{
     /** 是否缺少 */
@@ -19,6 +20,16 @@ function check_post_judge_data(data:CTX.post_judge_data):CTX.post_judge_data{
 
     if( !args.auto_io  && (!args.file_in || !args.file_out )){
         throw('auto_io为false时,file_in,file_out必须指明')
+    }
+
+    /** 对时间的范围时行检查 */
+    if( args.time <100 || args.time > 10000){
+        throw(`参数time 的范围不对,应该在[100,10000] ms 内,现在为${args.time}`)
+    }
+
+    /** 对内存的范围时行检查 */
+    if( args.memory<16 || args.memory > 1024){
+        throw(`参数memory 的范围不对,应该在[16,1024] mb 内,现在为${args.memory}`)
     }
 
     /** 检查是不是 支持的语言 */
@@ -65,7 +76,7 @@ export const createSocket = (app:Koa) => {
             catch(e){
                 Redis.PUBLISH_MESSAGE({
                     socket_client_id:<string>this.id,
-                    result:-1,
+                    result: JUDGE_ERROR_MAP_NUM.POST_ARGS_ERROR,
                     uid: data.uid, // 评测的唯一标识
                     message:e.message || e,
                     result_list:[]
