@@ -26,7 +26,9 @@ RUN git submodule init && git submodule update && \
 # 安装相应的judger 与testlib
 RUN npm install yarn -g && yarn config set registry https://registry.npm.taobao.org && \
     yarn && yarn build && \
-    cd testlib && ./install.sh && cd ../Judger && mkdir build && cd build && cmake .. && make && make install && cd ../bindings/NodeJS && yarn
+    cd testlib && ./install.sh && \
+    cd ../Judger && mkdir build && cd build && cmake .. && make && make install && \
+    cd ../bindings/NodeJS && yarn
 EXPOSE 5000
 EXPOSE 873
 ENTRYPOINT ["/JudgeServer/entrypoint.sh"]

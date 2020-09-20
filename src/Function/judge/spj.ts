@@ -6,6 +6,9 @@ import { CTX } from '../../types/global';
 import * as Judger from '../../../Judger/bindings/NodeJS'
 import debug from '../../lib/debug'
 import { read_file_queue }  from "../../utils/index"
+
+import {readFileSync} from 'fs'
+
 const SPJ_RUNTIME_ERROR = 6;
 export = async function spj(ctx:CTX.ctx,next:Function){
     let result = <CTX.result>(ctx.result)
@@ -23,6 +26,7 @@ export = async function spj(ctx:CTX.ctx,next:Function){
             debug.info(ctx.spj_judge_args);
             debug.info(ctx.result);
             (<CTX.result>ctx.result).result = SPJ_RUNTIME_ERROR;
+            (<CTX.result>ctx.result).detail = `log: ${readFileSync(<string>ctx.spj_judge_args!.log_path,'utf8')} stderr ${readFileSync(<string>ctx.spj_judge_args!.error_path,'utf8')}\n `
             //throw({
                 //result:"spj_judge_error", //spj 出现错误
                 //message: read_file_queue(<string>spj_judge_args.error_path,<string>spj_judge_args.log_path,<string>spj_judge_args.output_path) + "在测试点: " +ctx.config.point_num,

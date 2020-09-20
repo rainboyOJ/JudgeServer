@@ -33,7 +33,7 @@ export = async function compile_src(ctx:CTX.ctx,next:Function){
             if(result.result != 0){ //编译失败
                 throw({
                     result:'compile_error',
-                    message: readFileSync(<PathLike>(<CTX.judge_args>ctx.compile_args).error_path,{encoding:'utf-8'})
+                    message: `judge_log: ${readFileSync(<string>ctx.compile_args!.log_path,'utf8')} \n\n stderr: ${ readFileSync(<PathLike>(<CTX.judge_args>ctx.compile_args).error_path,'utf8') }`
                 })
             }
         }

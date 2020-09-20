@@ -72,7 +72,7 @@ var test_list = [
         }
     },
     {
-        name:"a+b cpp auto_io_false 指定spj.py",
+        name:"a+b python3 auto_io_false 指定spj.py",
         code_path:"a+b_freopen.cpp",
         judge_args:{
             uid:"a+b cpp auto_io_false 指定spj.py",
@@ -94,7 +94,7 @@ var test_list = [
         }
     },
     {
-        name:"a+b py3 auto_io_true 指定spj.py",
+        name:"a+b python3 auto_io_true 指定spj.py",
         code_path:"a+b.py",
         judge_args:{
             code:"",

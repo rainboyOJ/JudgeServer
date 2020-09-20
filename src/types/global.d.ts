@@ -87,6 +87,7 @@ declare namespace CTX {
         max_cpu_time?:number
         max_real_time?:number
         max_memory?:number
+        max_process_number?:number
         memory_limit_check_only?:number
         max_stack?:number
         max_process?:number

@@ -9,6 +9,7 @@ const language_template:LANGUGE_TEMPLATE = {
             max_memory: 536870912,//  512mb
             max_stack: 536870912,
             max_output_size: 536870912,
+            max_process_number:-1,
             input_path: "/dev/null",
             output_path: "{judge_path}/compile_output",
             error_path: "{judge_path}/compile_error",
@@ -21,6 +22,7 @@ const language_template:LANGUGE_TEMPLATE = {
         judge_args:{
             max_cpu_time: 10000,
             max_real_time: 30000,
+            max_process_number:-1,
             exe_path: "{judge_path}/main",
             max_memory: 536870912,//  512mb
             max_stack: 536870912,
@@ -37,6 +39,7 @@ const language_template:LANGUGE_TEMPLATE = {
         },
         spj_compile_args:{
             max_cpu_time: 10000,
+            max_process_number:-1,
             max_real_time: 30000,
             exe_path: "/usr/bin/g++",
             max_memory: 536870912,//  512mb
@@ -54,6 +57,7 @@ const language_template:LANGUGE_TEMPLATE = {
         spj_judge_args:{
             max_cpu_time: 10000,
             max_real_time: 30000,
+            max_process_number:-1,
             exe_path: "{spj_path}",
             max_memory: 536870912,//  512mb
             max_stack: 536870912,
@@ -73,6 +77,7 @@ const language_template:LANGUGE_TEMPLATE = {
         compile_args:{
             max_cpu_time: 10000,
             max_real_time: 30000,
+            max_process_number:-1,
             exe_path: "/usr/bin/python3",
             max_memory: 536870912,//  512mb
             max_stack: 536870912,
@@ -90,6 +95,7 @@ const language_template:LANGUGE_TEMPLATE = {
         judge_args:{
             max_cpu_time: 10000,
             max_real_time: 30000,
+            max_process_number:-1,
             exe_path: "/usr/bin/python3",
             max_memory: 536870912,//  512mb
             max_stack: 536870912,
@@ -110,6 +116,7 @@ const language_template:LANGUGE_TEMPLATE = {
             max_real_time: 30000,
             exe_path: "/usr/bin/python3",
             max_memory: 536870912,//  512mb
+            max_process_number:-1,
             max_stack: 536870912,
             max_output_size: 536870912,
             input_path: "/dev/null",
@@ -131,6 +138,7 @@ const language_template:LANGUGE_TEMPLATE = {
             max_cpu_time: 10000,
             max_real_time: 30000,
             exe_path: "{spj_path}",
+            max_process_number:-1,
             max_memory: 536870912,//  512mb
             max_stack: 536870912,
             max_output_size: 536870912,

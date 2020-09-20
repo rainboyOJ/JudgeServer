@@ -6,6 +6,7 @@ import { CTX } from '../../types/global';
 import * as Judger from '../../../Judger/bindings/NodeJS'
 import debug from '../../lib/debug'
 import {JUDGE_ERROR_MAP_NUM}from '../../lib/DEFINE'
+import { readFileSync } from 'fs'
 export = async function judge(ctx:CTX.ctx,next:Function){
     
     try {
@@ -33,5 +34,9 @@ export = async function judge(ctx:CTX.ctx,next:Function){
         if( ctx.result.memory > ctx.post_judge_data.memory!*1024*1024 )
             ctx.result.result = Judger.RESULT_MEMORY_LIMIT_EXCEEDED;
     }
+    else { //发生错误
+        ctx.result.detail = `log: ${readFileSync(<string>ctx.judge_args!.log_path,'utf8')} stderr ${readFileSync(<string>ctx.judge_args!.error_path,'utf8')}\n `
+    }
+
     await next()
 }
