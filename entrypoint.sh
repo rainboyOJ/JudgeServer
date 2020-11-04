@@ -4,6 +4,7 @@
 redis-server /etc/redis/redis.conf
 # rsync
 ip=$(ip addr show  | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
+rm -rf /var/run/rsyncd.pid
 rsync --address=$ip --port=873 --config=/JudgeServer/config/rsync.conf --daemon
 core=$(expr $(nproc) - 1)
 if [ $core == 0 ]; then
